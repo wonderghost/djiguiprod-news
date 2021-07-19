@@ -17,4 +17,5 @@ Route::get('/', function () {
     return view('app');
 });
 
-Route::get('/login',[Auth\LoginController::class,'index']);
+Route::get('/login',[Auth\LoginController::class,'index'])->middleware('guest');
+Route::post('/login',[Auth\LoginController::class,'login']);
