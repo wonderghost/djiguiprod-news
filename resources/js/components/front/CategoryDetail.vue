@@ -16,7 +16,8 @@
                   max-width="900"
                   max-height="900"
                   :elevation="hover ? 16 : 2"
-                  :class="{ 'on-hover': hover }">
+                  :class="{ 'on-hover': hover }"
+                  @click="openDetail(article)">
                   <v-img
                      class="white--text align-end"
                      height="450px"
@@ -35,7 +36,8 @@
                            class="mx-auto"
                            max-width="400"
                            :elevation="hover ? 16 : 2"
-                           :class="{ 'on-hover': hover }">
+                           :class="{ 'on-hover': hover }"
+                           @click="openDetail(article)">
                            <v-img
                               class="white--text align-end"
                               height="200px"
@@ -79,7 +81,8 @@
                      <v-card
                         flat
                         :elevation="hover ? 16 : 2"
-                        :class="{ 'on-hover': hover }">
+                        :class="{ 'on-hover': hover }"
+                        @click="openDetail(article)">
                         <v-row>
                            <v-col cols="12" md="6">
                               <v-img
@@ -107,66 +110,69 @@
 
 <script>
 export default {
-  data() {
-    return {
-      articles: [],
-      categoryName: null,
-      items: [
-        {
-          text: "Accueil",
-          disabled: false,
-          href: "/",
-        },
-        {
-          text: "Culture",
-          disabled: true,
-          href: "/culture",
-        },
-      ],
-    };
-  },
+   data() {
+      return {
+         articles: [],
+         categoryName: null,
+         items: [
+            {
+               text: "Accueil",
+               disabled: false,
+               href: "/",
+            },
+            {
+               text: "Culture",
+               disabled: true,
+               href: "/culture",
+            },
+         ],
+      };
+   },
 
-  mounted() {
-    this.getCategoryByName();
-    this.getArticles();
-  },
+   mounted() {
+      this.getCategoryByName();
+      this.getArticles();
+   },
 
-  watch: {
-    $route: "getCategoryByName",
-  },
+   watch: {
+      $route: "getCategoryByName",
+   },
 
-  methods: {
-    getArticles: async function () {
-      try {
-        let response = await axios.get("/article");
-        if (response.status == 200) {
-          this.articles = response.data;
-          console.log(this.articles);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    getCategoryByName: async function () {
-      try {
-        let response = await axios.get(
-          "/category/" + this.$route.params.slug + "/show"
-        );
-        if (response.status == 200) {
-          this.categoryName = response.data.name;
-          console.log(this.categoryName);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-  },
-  computed: {
-    articlesByCategory() {
-      return this.articles.filter((cat) => {
-        return cat.category.slug == this.$route.params.slug;
-      });
-    },
-  },
+   methods: {
+      getArticles: async function () {
+         try {
+         let response = await axios.get("/article");
+         if (response.status == 200) {
+            this.articles = response.data;
+            console.log(this.articles);
+         }
+         } catch (error) {
+         console.log(error);
+         }
+      },
+      getCategoryByName: async function () {
+         try {
+         let response = await axios.get(
+            "/category/" + this.$route.params.slug + "/show"
+         );
+         if (response.status == 200) {
+            this.categoryName = response.data.name;
+            console.log(this.categoryName);
+         }
+         } catch (error) {
+         console.log(error);
+         }
+      },
+      openDetail(a) {
+         this.$router.push('/' + a.category.slug + '/' + a.slug);
+      },
+   },
+   computed: {
+      articlesByCategory() {
+         return this.articles.filter((cat) => {
+         return cat.category.slug == this.$route.params.slug;
+         });
+      },
+   },
 };
 </script>
