@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <div id="app" data-app>
+    <div id="app">
         <app></app>
     </div>
     

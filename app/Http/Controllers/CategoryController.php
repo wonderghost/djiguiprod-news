@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            return Category::orderBy('created_at', 'DESC')->get();
+            return response()->json(Category::orderBy('name', 'ASC')->get(), 200);
         } catch (ErrorException $e) {
             header("Erreur", true, 422);
             return response()->json($e->getMessage(), 422);

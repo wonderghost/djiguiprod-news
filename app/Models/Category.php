@@ -11,6 +11,9 @@ class Category extends Model
     use HasFactory, Sluggable;
 
     protected $fillable = ['name'];
+    protected $table = 'category';
+    protected $keyType = "string";
+    protected $primaryKey = "slug";
 
     public function sluggable(): array
     {
@@ -23,7 +26,7 @@ class Category extends Model
 
     public function subCategories() 
     {
-        return $this->hasMany(SubCategory::class);
+        return $this->hasMany(SubCategory::class, 'id_category', 'slug')->first();
     }
 
 }

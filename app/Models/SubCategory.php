@@ -11,6 +11,9 @@ class SubCategory extends Model
     use HasFactory, Sluggable;
 
     protected $fillable = ['name', 'id_category'];
+    protected $table = 'sub_category';
+    protected $keyType = "string";
+    protected $primaryKey = "slug";
 
     public function sluggable(): array
     {
@@ -23,6 +26,11 @@ class SubCategory extends Model
 
     public function category() 
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'id_category', 'slug')->first();
+    }
+
+    public function articles() 
+    {
+        return $this->hasMany(Article::class, 'id_sub_category', 'slug')->first();
     }
 }

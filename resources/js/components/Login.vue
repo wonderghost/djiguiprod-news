@@ -57,7 +57,8 @@
                     let response = await axios.post('/login',this.form)
                     if(response.status == 200)
                     {
-                        location.reload()
+                        // location.reload()
+                        this.$router.push('/');
                     }
                 }
                 catch(error)
