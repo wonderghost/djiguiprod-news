@@ -23,6 +23,7 @@ Route::post('/login',[Auth\LoginController::class,'login']);
 Route::prefix('/category')->group(function() {
     Route::get('', [CategoryController::class, 'index']);
     Route::post('/store', [CategoryController::class, 'store']);
+    Route::get('/{slug}/show', [CategoryController::class, 'show']);
     Route::put('/{slug}/update', [CategoryController::class, 'update']);
     Route::delete('/{slug}/delete', [CategoryController::class, 'destroy']);
 });

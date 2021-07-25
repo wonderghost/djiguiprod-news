@@ -6,7 +6,7 @@
             max-width="600"
             :elevation="hover ? 16 : 2"
             :class="{ 'on-hover': hover }"
-            @click="openDetail()">
+            @click="openDetail(article)">
             <v-img
                class="white--text align-end"
                height="215"
@@ -23,8 +23,8 @@ export default {
    props: ['article'],
 
    methods: {
-      openDetail() {
-         this.$router.push('/categorie/cultures');
+      openDetail(a) {
+         this.$router.push(a.category.slug + '/' + a.slug);
       }
    }
 }

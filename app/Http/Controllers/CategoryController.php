@@ -51,9 +51,20 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(string $slug)
     {
-        //
+        try
+        {
+            $category = Category::where('slug', '=', $slug)->first();
+            if($category) {
+                return response()->json($category, 200);
+            }
+            throw new ErrorException("Cete catégorie n'existe pas.", 422);
+        } catch(ErrorException $e)
+        {
+            header('Erreur', true, 422);
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
