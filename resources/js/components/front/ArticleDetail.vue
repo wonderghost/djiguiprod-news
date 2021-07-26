@@ -18,7 +18,7 @@
               </p>
               <p class="mr-16 text--grey">
                 <v-icon>access_time</v-icon>
-                {{ article.created_at }}
+                {{ article.created_at | formatDate}}
               </p>
             </div>
           </v-card-text>

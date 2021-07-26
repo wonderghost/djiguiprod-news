@@ -28,6 +28,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "moment": "^2.29.1",
         "vue-router": "^3.5.2",
         "vue-social-sharing": "^3.0.8",
         "vuetify": "^2.5.6",

@@ -9,6 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 
 import VueSocialSharing from 'vue-social-sharing'
+import moment from 'moment'
 
 Vue.use(VueSocialSharing);
 
