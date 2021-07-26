@@ -17,8 +17,15 @@ Route::get('/', function () {
     return view('app');
 });
 
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware('auth');
+
 Route::get('/login',[Auth\LoginController::class,'index'])->middleware('guest');
 Route::post('/login',[Auth\LoginController::class,'login']);
+Route::get('/user', function() {
+    return request()->user();
+})->middleware('auth');
 
 Route::prefix('/category')->group(function() {
     Route::get('', [CategoryController::class, 'index']);

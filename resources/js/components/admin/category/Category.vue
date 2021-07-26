@@ -2,20 +2,20 @@
   <div>
     <h1>Liste des catégories</h1>
 
-    <AddCategory/>
+    <!-- <AddCategory/>
 
-    <ListCategory/>
+    <ListCategory/> -->
   </div>
 </template>
 
 <script>
-import AddCategory from "./AddCategory.vue"
-import ListCategory from "./ListCategory.vue"
+// import AddCategory from "./AddCategory.vue"
+// import ListCategory from "./ListCategory.vue"
 export default {
-  components: {
-    AddCategory,
-    ListCategory,
-  },
+  // components: {
+  //   AddCategory,
+  //   ListCategory,
+  // },
   data() {
     return {
       search: "",

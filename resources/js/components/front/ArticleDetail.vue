@@ -14,29 +14,24 @@
           <v-card-text class="text--primary">
             <div class="d-flex justify-space-between">
               <p class="text-left">
-                <v-icon>person</v-icon> Autheur: {{ article.author }}
+                <v-icon>mdi-account</v-icon> Autheur: {{ article.author }}
               </p>
               <p class="mr-16 text--grey">
-                <v-icon>access_time</v-icon>
+                <v-icon>mdi-clock</v-icon>
                 {{ article.created_at | formatDate}}
               </p>
             </div>
           </v-card-text>
-          <v-card-text>
+          <v-card-text class="text-center">
             <v-btn
+              small
+              fab
               v-for="(icon, index) in socialMedia"
               :key="index"
               class="mx-4 black--text"
-              icon
+              :href="icon.href + encodeURI(loc)"
             >
-              <ShareNetwork
-                :network="icon.network"
-                url="http://localhost:8000/#/cultures/fode-baro-sest-marie-ce-week-end"
-                :title="article.name"
-                :description="article.description"
-              >
-                <v-icon size="200%">{{ icon.icon }}</v-icon>
-              </ShareNetwork>
+            <v-icon :color="icon.color">{{ icon.icon }}</v-icon>
             </v-btn>
           </v-card-text>
         </v-card>
@@ -58,16 +53,23 @@ export default {
         {
           icon: "mdi-facebook",
           network: "facebook",
+          href: 'https://www.facebook.com/share.php?u=',
+          color: '#00acee'
         },
         {
           icon: "mdi-twitter",
           network: "Twitter",
+          href: 'https://twitter.com/intent/tweet?url=',
+          color: '#3b5998'
         },
         {
           icon: "mdi-linkedin",
           network: "linkedIn",
+          href: 'https://www.linkedin.com/shareArticle/?url',
+          color: '#0e76a8'
         },
       ],
+      loc : location.href
     };
   },
   methods: {
@@ -84,9 +86,8 @@ export default {
       }
     },
   },
-  created() {
+  mounted() {
     this.getArticle();
-    console.log(this.article.description);
-  },
+  }
 };
 </script>

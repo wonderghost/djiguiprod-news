@@ -2,7 +2,7 @@
     <v-navigation-drawer v-model="drawer" permanent color="#F4F5F9" app>
         <v-list-item class="px-2 py-5">
             <v-list-item-title class="text-capitalize" align="center">
-                <v-icon x-large>dashboard</v-icon> DJIGUIPROD
+                <v-icon x-large>mdi-view-dashboard</v-icon> DJIGUIPROD
             </v-list-item-title>
         </v-list-item>
         <v-list nav dense>
@@ -43,9 +43,9 @@ export default {
         selectedItem: 0,
         drawer: null,
         items: [
-            {icon: 'dashboard', text: 'Dashboard', route: '/dashboard'},
-            {icon: 'article', text: 'Articles', route: '/article'},
-            {icon: 'category', text: 'Catégories', route: 'category'},
+            {icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/dashboard'},
+            {icon: 'mdi-file', text: 'Articles', route: '/article'},
+            {icon: 'mdi-shop', text: 'Catégories', route: 'category'},
             {icon: 'subtitles', text: 'Sous Catégories', route: '/sub-category'},
             {icon: 'people', text: 'Redacteurs', route: '/article'},
         ]
