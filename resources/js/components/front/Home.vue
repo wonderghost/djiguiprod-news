@@ -82,7 +82,7 @@
       </v-col>
     </v-row>
 
-    <h1 class="mt-5">Sport</h1>
+    <h1 class="mt-5"><router-link to="/categorie/sports" class="black--text text-decoration-none">Sports</router-link></h1>
     <v-divider></v-divider>
     <div class="my-4">
       <v-row>
@@ -94,7 +94,7 @@
       </v-row>
     </div>
 
-    <h1 class="mt-5">Cultures</h1>
+    <h1 class="mt-5"><router-link to="/categorie/cultures" class="black--text text-decoration-none">Cultures</router-link></h1>
     <v-divider></v-divider>
     <div class="my-4">
       <v-row>

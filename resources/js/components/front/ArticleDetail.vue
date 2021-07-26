@@ -12,13 +12,10 @@
                     </v-img>
                     <v-card-text class="text--primary">
                         <div class="d-flex justify-space-between">
-                        <p class="text-left"
-                            ><v-icon>person</v-icon> Autheur: {{ article.author }}</p
-                        >
-                        <p class="mr-16 text--grey">
-                            <v-icon>access_time</v-icon>
-                            {{ article.created_at }}
-                        </p>
+                            <p class="text-left"><v-icon>person</v-icon> Autheur: {{ article.author }}</p>
+                            <p class="mr-16 text--grey"><v-icon>access_time</v-icon>
+                                {{ article.created_at }}
+                            </p>
                         </div>
                     </v-card-text>
                 </v-card>

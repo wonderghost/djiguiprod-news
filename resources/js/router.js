@@ -4,6 +4,8 @@ import Home from './components/front/Home.vue';
 import App from './components/App.vue';
 import CategoryDetail from './components/front/CategoryDetail.vue';
 import ArticleDetail from './components/front/ArticleDetail.vue';
+import Dashboard from './components/admin/Dashboard.vue';
+import Category from './components/admin/category/Category.vue';
 
 Vue.use(VueRouter)
 
@@ -23,6 +25,19 @@ const router = new VueRouter({
             path: '/:categorie/:slug',
             name: 'article',
             component: ArticleDetail
+        },
+        {
+            path: '/dashboard',
+            name: 'dashboard',
+            component: Dashboard,
+            children: [
+                {
+                    path: 'category',
+                    name: 'categorie',
+                    component: Category
+                }
+
+            ]
         }
     ]
 })

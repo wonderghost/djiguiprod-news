@@ -1,10 +1,10 @@
 <template>
    <div v-if="articlesByCategory.length > 0">
       <div>
-         <v-breadcrumbs :items="items" class="pl-0"></v-breadcrumbs>
+         <v-breadcrumbs :items="items" class="pl-0 my-n4"></v-breadcrumbs>
       </div>
 
-      <h2 class="mb-4">{{ categoryName }}</h2>
+      <h2 class="my-4">{{ categoryName }}</h2>
 
       <div class="mb-4">
          <v-row>
@@ -172,7 +172,7 @@ export default {
          return this.articles.filter((cat) => {
          return cat.category.slug == this.$route.params.slug;
          });
-      },
+      } 
    },
 };
 </script>

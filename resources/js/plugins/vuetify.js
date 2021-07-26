@@ -9,11 +9,8 @@ import '@mdi/font/css/materialdesignicons.css'
 
 Vue.use(Vuetify)
 
-const opts = {
+export default new Vuetify({
     icons: {
-        // iconfont: `md` || `fa`
-        iconfont: `mdi`
+        iconfont: `md` || `fa`
     }
-}
-
-export default new Vuetify(opts)
+})

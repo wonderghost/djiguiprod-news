@@ -5,9 +5,9 @@
             <router-link to="/">
                <v-img
                   style="margin-left: 80px"
-                  max-height="35"
-                  max-width="60"
-                  src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg">
+                  max-height="80"
+                  max-width="150"
+                  src="images/logo-djigui.png">
                </v-img>
             </router-link>
          </v-toolbar-title>
