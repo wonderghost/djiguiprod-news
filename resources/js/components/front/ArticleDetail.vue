@@ -24,20 +24,18 @@
           </v-card-text>
           <v-card-text>
             <v-btn
-              v-for="icon in socialMedia"
-              :key="icon"
+              v-for="(icon, index) in socialMedia"
+              :key="index"
               class="mx-4 black--text"
               icon
             >
               <ShareNetwork
                 :network="icon.network"
-                url="https://news.vuejs.org/issues/180"
+                url="http://localhost:8000/#/cultures/fode-baro-sest-marie-ce-week-end"
                 :title="article.name"
-                :description="article.description.substr(0, 100) + '...'"
+                :description="article.description"
               >
-                <v-icon size="200%">
-                  {{ icon.icon }}
-                </v-icon>
+                <v-icon size="200%">{{ icon.icon }}</v-icon>
               </ShareNetwork>
             </v-btn>
           </v-card-text>
@@ -80,7 +78,6 @@ export default {
         );
         if (response.status == 200) {
           this.article = response.data;
-          console.log(this.article);
         }
       } catch (error) {
         console.log(error);
@@ -89,6 +86,7 @@ export default {
   },
   created() {
     this.getArticle();
+    console.log(this.article.description);
   },
 };
 </script>

@@ -12,6 +12,12 @@ import VueSocialSharing from 'vue-social-sharing'
 
 Vue.use(VueSocialSharing);
 
+Vue.filter('formatDate', function (value) {
+    if (value) {
+        return moment(String(value)).format('MM/DD/YYYY hh:mm')
+    }
+});
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
