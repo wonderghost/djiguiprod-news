@@ -8,7 +8,8 @@ const store = new Vuex.Store({
         _token : document.querySelector("meta[name=csrf-token]").content,
         loader : false,
         user: null,
-        drawer: false
+        drawer: false,
+        categories: [],
     },
     mutations : {
         loading(state,value)
@@ -20,6 +21,9 @@ const store = new Vuex.Store({
         },
         setUser(state, value) {
             state.user = value
+        },
+        setCategories(state, value) {
+            state.categories = value
         }
     },
 
@@ -31,6 +35,14 @@ const store = new Vuex.Store({
             response.then(r => {
                 context.commit('setUser', r.data)
             })
+        },
+        getCategories(context) {
+            let response = async function() {
+                return await axios.get('/category');
+            }();
+            response.then(result => {
+                context.commit('setCategories', result.data)
+            });
         }
     }
 

@@ -2,9 +2,9 @@
   <div>
     <h1>Liste des catégories</h1>
 
-    <add-category v-on:reloadlist="getCategories()" />
+    <add-category/>
 
-    <list-category :categories="categories" v-on:reloadlist="getCategories()" />
+    <list-category :categories="categories"/>
     
   </div>
 </template>
@@ -20,27 +20,19 @@ export default {
   data() {
     return {
       search: "",
-      categories: [],
-      isLoading: false,
-      snackbar: false,
-      errors: {},
     };
   },
   methods: {
-    getCategories() {
-      axios
-        .get("/category")
-        .then((res) => {
-          console.log(res.data);
-          this.categories = res.data;
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    },
+    
   },
   mounted() {
-    this.getCategories();
+    this.$store.dispatch("getCategories");
+    console.log(this.categories)
   },
+  computed: {
+    categories() {
+      return this.$store.state.categories;
+    }
+  }
 };
 </script>

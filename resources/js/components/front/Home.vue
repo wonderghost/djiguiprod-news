@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-row>
-      <v-col cols="12" md="8">
+      <v-col cols="12" md="8" class="mt-6">
         <template v-for="(article, index) in articles.slice(0, 1)">
           <v-hover v-slot="{ hover }" open-delay="200" :key="index">
             <v-card
@@ -21,7 +21,7 @@
           </v-hover>
         </template>
       
-        <div class="mt-4">
+        <div class="mt-4" >
           <v-row>
             <template v-for="(article, index) in articles.slice(1, 3)">
               <v-col cols="12" md="6" :key="index">
@@ -49,7 +49,7 @@
         </div>
       </v-col>
 
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="4" class="mt-6">
         <v-hover v-slot="{ hover }" open-delay="200">
           <v-card
             class="mx-auto mb-4"

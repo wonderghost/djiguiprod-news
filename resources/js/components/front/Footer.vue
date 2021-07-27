@@ -21,13 +21,14 @@
               </v-row>
 
               <v-btn
-                v-for="icon in icons"
-                :key="icon"
+                v-for="(icon, index) in icons"
+                :key="index"
                 class="mx-4 white--text"
                 icon
+                
               >
-                <v-icon size="200%">
-                  {{ icon }}
+                <v-icon size="250%" :color="icon.color">
+                  {{ icon.icon }}
                 </v-icon>
               </v-btn>
             </v-card-text>
@@ -47,7 +48,20 @@
 <script>
 export default {
   data: () => ({
-    icons: ["mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram"],
+    icons: [
+      {
+          icon: "mdi-facebook",
+          color: '#00acee'
+        },
+        {
+          icon: "mdi-twitter",
+          color: '#3b5998'
+        },
+        {
+          icon: "mdi-linkedin",
+          color: '#0e76a8'
+        },
+    ],
   }),
 };
 </script>

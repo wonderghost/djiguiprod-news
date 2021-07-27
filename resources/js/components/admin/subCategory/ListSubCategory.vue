@@ -5,28 +5,35 @@
         <thead>
           <tr>
             <th class="text-center"># N°</th>
-            <th class="text-center">Nom (catégorie)</th>
+            <th class="text-center">Sous Catégorie</th>
+            <th class="text-center">Catégorie</th>
             <th class="text-center">Ajouté le :</th>
             <th class="text-center">Actions</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="(category, index) in categories" :key="index">
+        <tbody v-if="subCategories.length > 0">
+          <tr v-for="(subCategory, index) in subCategories" :key="index">
             <td class="text-center">{{ index + 1 }}</td>
-            <td class="text-center">{{ category.name }}</td>
-            <td class="text-center">{{ category.created_at | formatDate }}</td>
+            <td class="text-center">{{ subCategory.name }}</td>
+            <td class="text-center">{{ subCategory.id_category }}</td>
+            <td class="text-center">
+              {{ subCategory.created_at | formatDate }}
+            </td>
             <td class="text-center">
               <p>
-                <v-icon color="success" @click="openEditDialog(category)"
+                <v-icon color="success" @click="openEditDialog(subCategory)"
                   >mdi-circle-edit-outline</v-icon
                 >
-                <v-icon color="error" @click="openDialog(category)"
+                <v-icon color="error" @click="openDialog(subCategory)"
                   >mdi-delete</v-icon
                 >
               </p>
             </td>
           </tr>
         </tbody>
+        <div v-if="subCategories.length == 0">
+          Il n'y a aucune sous catégorie
+        </div>
       </template>
     </v-simple-table>
 
@@ -47,7 +54,7 @@
           >
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="green darken-1" text @click="removeCategory()" :loading="isLoading">
+            <v-btn color="green darken-1" text @click="removeSubCategory()">
               Oui, supprimer
             </v-btn>
             <v-btn color="error darken-1" text @click="dialog = false">
@@ -62,7 +69,7 @@
       <v-dialog v-model="editDialog" persistent max-width="350">
         <v-card>
           <v-card-title>
-            <span class="text-h5">Modifier la catégorie</span>
+            <span class="text-h5">Modifier la sous catégorie</span>
           </v-card-title>
           <v-card-text>
             <v-container>
@@ -70,12 +77,23 @@
                 <v-col cols="12">
                   <v-form>
                     <v-text-field
-                      label="Nom de la catégorie"
-                      :value="singleEditCategory.name"
-                      v-model="singleEditCategory.name"
+                      label="Nom de la sous catégorie"
+                      :value="singleEditSubCategory.name"
+                      v-model="singleEditSubCategory.name"
                       required
                     >
                     </v-text-field>
+                    <v-select
+                      v-model="select"
+                      :hint="`${select.name}, ${select.id}`"
+                      :items="categories"
+                      item-text="name"
+                      item-value="id"
+                      label="Choisir une catégorie"
+                      persistent-hint
+                      return-object
+                      single-line
+                    ></v-select>
                   </v-form>
                 </v-col>
               </v-row>
@@ -112,14 +130,14 @@
 
 <script>
 export default {
-  props: ["categories"],
+  props: ["subCategories", 'categories'],
 
   data() {
     return {
       dialog: false,
       editDialog: false,
-      singleEditCategory: {},
-      singleCategory: {},
+      singleEditSubCategory: {},
+      singleSubCategory: {},
       message: "",
       name: "",
       isLoading: false,
@@ -128,58 +146,53 @@ export default {
       form: {
         name: "",
       },
+      select: { name: "Cétégorie", id: "0" },
     };
   },
   methods: {
-    editCategory: async function() {
-      this.isLoading = true;
-      try {
-        let response = await axios.put("/category/" + this.singleEditCategory.slug + "/update",
-          this.singleEditCategory);
-        if(response.status == 200) {
-          console.log(response);
-          this.isLoading = false
-          this.message = response.data.message;
+    editCategory() {
+      axios
+        .put(
+          "/sub-category/" + this.singleEditSubCategory.slug + "/update",
+          this.singleEditSubCategory
+        )
+        .then((res) => {
+          console.log(res);
+          this.message = res.data.message;
           this.snackbar = true;
           this.editDialog = false;
-          this.editCategory = false;
-          this.$store.dispatch('getCategories');
-        }
-      } catch(error) {
-        console.log(error);
-        this.isLoading = false;
-        this.errors = error.response.errors;
-      }
+          this.$emit("reloadlist");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
 
-    removeCategory: async function() {
-      this.isLoading = true;
-      try {
-        let respose = await axios.delete("/category/" + this.singleCategory.slug + "/delete");
-        if(respose.status == 200) {
-          console.log(respose);
-          this.isLoading = false
-          this.message = respose.data.message;
+    removeSubCategory() {
+      axios
+        .delete("/sub-category/" + this.singleEditSubCategory.slug + "/delete")
+        .then((res) => {
+          console.log(res);
           this.dialog = false;
           this.snackbar = true;
-          this.$store.dispatch('getCategories');
-        }
-      } catch(error) {
-        console.log(error);
-        this.isLoading = false
-        this.errors = error.response.errors;
-      }
+          this.message = res.data.message;
+          this.$emit("reloadlist");
+          this.$store.dispatch("getCategories");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
 
-    openDialog(category) {
+    openDialog(subCategory) {
       this.dialog = true;
-      this.name = category.name;
-      this.singleCategory = category;
+      this.name = subCategory.name;
+      this.singleEditSubCategory = subCategory;
     },
 
-    openEditDialog(category) {
+    openEditDialog(subCategory) {
       this.editDialog = true;
-      this.singleEditCategory = category;
+      this.singleEditSubCategory = subCategory;
     },
   },
 };

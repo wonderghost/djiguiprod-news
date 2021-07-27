@@ -31,7 +31,7 @@
               class="mx-4 black--text"
               :href="icon.href + encodeURI(loc)"
             >
-            <v-icon :color="icon.color">{{ icon.icon }}</v-icon>
+            <v-icon :color="icon.color" size="250%">{{ icon.icon }}</v-icon>
             </v-btn>
           </v-card-text>
         </v-card>

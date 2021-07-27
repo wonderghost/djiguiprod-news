@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-16">
+  <div class="">
     <template v-if="user">
       <v-navigation-drawer v-model="drawer" color="#F4F5F9" app>
         <v-list-item class="px-2 py-5">
@@ -56,7 +56,6 @@
           </v-img>
         </router-link>
       </v-toolbar-title>
-
       <v-spacer></v-spacer>
       <div style="margin-right: 80px">
         <template v-for="(category, index) in categories">
@@ -76,34 +75,36 @@
 export default {
   data() {
     return {
-      categories: [],
       selectedItem: 0,
-        items: [
-            {icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/dashboard'},
-            {icon: 'mdi-file', text: 'Articles', route: '/article'},
-            {icon: 'mdi-briefcase-variant', text: 'Catégories', route: 'category'},
-            {icon: 'mdi-subtitles', text: 'Sous Catégories', route: '/sub-category'},
-            {icon: 'mdi-account-supervisor', text: 'Redacteurs', route: '/article'},
-        ]
+      items: [
+        { icon: "mdi-view-dashboard", text: "Dashboard", route: "/dashboard" },
+        { icon: "mdi-file", text: "Articles", route: "/article" },
+        {
+          icon: "mdi-briefcase-variant",
+          text: "Catégories",
+          route: "category",
+        },
+        {
+          icon: "mdi-subtitles",
+          text: "Sous Catégories",
+          route: "/sous-categorie",
+        },
+        {
+          icon: "mdi-account-supervisor",
+          text: "Redacteurs",
+          route: "/article",
+        },
+      ],
     };
   },
 
   mounted() {
-    this.initCategory();
     this.$store.dispatch("actifUser");
+    this.$store.dispatch("getCategories");
   },
 
   methods: {
-    initCategory: async function () {
-      try {
-        let response = await axios.get("/category");
-        if (response.status == 200) {
-          this.categories = response.data;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
+    
   },
 
   computed: {
@@ -113,6 +114,9 @@ export default {
     drawer() {
       return this.$store.state.drawer;
     },
+    categories() {
+      return this.$store.state.categories;
+    }
   },
 };
 </script>

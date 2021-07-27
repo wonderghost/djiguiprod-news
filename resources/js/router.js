@@ -5,6 +5,7 @@ import CategoryDetail from './components/front/CategoryDetail.vue';
 import ArticleDetail from './components/front/ArticleDetail.vue';
 import Category from './components/admin/category/Category.vue';
 import Dashboard from './components/admin/Dashboard.vue';
+import SubCategory from './components/admin/subCategory/SubCategory.vue';
 
 Vue.use(VueRouter)
 
@@ -30,10 +31,13 @@ const router = new VueRouter({
             name: 'dashboard',
             component: Dashboard
         },
-    
         {
             path: '/category',
             component: Category
+        },
+        {
+            path: '/sous-categorie',
+            component: SubCategory,
         }
     ],
 })

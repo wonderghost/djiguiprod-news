@@ -62,33 +62,25 @@ export default {
   },
 
   methods: {
-    addCategory() {
+    addCategory: async function() {
       this.isLoading = true;
-      if (this.form.name == "") {
-        return;
-      }
-      axios
-        .post("/category/store", this.form)
-        .then((res) => {
-          console.log(res);
-          this.message = res.data.message;
+      try {
+        let response = await axios.post('/category/store', this.form)
+        if(response.status == 200) {
+          console.log(response);
+          this.message = response.data.message;
           this.snackbar = true;
-          this.$emit("reloadlist");
+          this.isLoading = false;
           this.$refs.form.reset();
           this.$refs.form.resetValidation();
-          this.$emit('reloadlist');
-        })
-        .catch((err) => {
-          console.error(err);
-          if(err.status == 422) {
-              console.log("errors......")
-          }
-          this.errors = error.response.errors;
-        })
-        .finally(() => {
-          this.isLoading = false;
-        });
-    },
+          this.$store.dispatch("getCategories");
+        } 
+      } catch(error) {
+        console.log(error)
+        this.isLoading = false;
+        this.errors = error.response.errors;
+      }
+    }
   },
 };
 </script>
