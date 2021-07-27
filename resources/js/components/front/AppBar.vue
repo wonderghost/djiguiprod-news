@@ -77,6 +77,14 @@ export default {
   data() {
     return {
       categories: [],
+      selectedItem: 0,
+        items: [
+            {icon: 'mdi-view-dashboard', text: 'Dashboard', route: '/dashboard'},
+            {icon: 'mdi-file', text: 'Articles', route: '/article'},
+            {icon: 'mdi-briefcase-variant', text: 'Catégories', route: 'category'},
+            {icon: 'mdi-subtitles', text: 'Sous Catégories', route: '/sub-category'},
+            {icon: 'mdi-account-supervisor', text: 'Redacteurs', route: '/article'},
+        ]
     };
   },
 
@@ -90,7 +98,6 @@ export default {
       try {
         let response = await axios.get("/category");
         if (response.status == 200) {
-          console.log(response.data);
           this.categories = response.data;
         }
       } catch (error) {

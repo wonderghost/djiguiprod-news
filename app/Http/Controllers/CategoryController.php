@@ -38,7 +38,11 @@ class CategoryController extends Controller
             $category->name = $request->name;
             $category->save();
 
-            return response()->json($category, 200);
+            $response = [
+                'data' => $category,
+                'message' => $category->name . " ajouté(e) avec succès" 
+            ];
+            return response()->json($response, 200);
         } catch (ErrorException $e) {
             header("Erreur", true, 422);
             return response()->json($e->getMessage(), 422);
