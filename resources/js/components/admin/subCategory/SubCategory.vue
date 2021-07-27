@@ -22,38 +22,33 @@ export default {
       subCategories: [],
       isLoading: false,
       snackbar: false,
-      categories: [],
       errors: {},
     };
   },
   methods: {
-    getSubCategories() {
-      axios
-        .get("/sub-category")
-        .then((res) => {
-          console.log(res.data);
-          this.subCategories = res.data;
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+    getSubCategories: async function() {
+      try {
+        let response = await axios.get('/sub-category');
+        if(response.status == 200) {
+          console.log(response);
+          this.subCategories = response.data;
+        }
+      } catch(error) {
+        console.log(error);
+        this.errors = error.response.errors;
+      }
     },
+  },
 
-    getCategories() {
-      axios
-        .get("/category")
-        .then((res) => {
-          console.log(res.data);
-          this.categories = res.data;
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    },
-  },
-  created() {
+  mounted() {
     this.getSubCategories();
-    this.getCategories();
+    this.$store.dispatch('getCategories');
   },
+
+  computed: {
+    categories() {
+      return this.$store.state.categories;
+    }
+  }
 };
 </script>

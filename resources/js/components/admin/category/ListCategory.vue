@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-10">
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -17,7 +17,7 @@
             <td class="text-center">{{ category.created_at | formatDate }}</td>
             <td class="text-center">
               <p>
-                <v-icon color="success" @click="openEditDialog(category)"
+                <v-icon color="success" class="mx-3" @click="openEditDialog(category)"
                   >mdi-circle-edit-outline</v-icon
                 >
                 <v-icon color="error" @click="openDialog(category)"

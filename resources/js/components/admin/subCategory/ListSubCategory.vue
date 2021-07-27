@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-10">
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -21,7 +21,10 @@
             </td>
             <td class="text-center">
               <p>
-                <v-icon color="success" @click="openEditDialog(subCategory)"
+                <v-icon
+                  color="success"
+                  class="mx-3"
+                  @click="openEditDialog(subCategory)"
                   >mdi-circle-edit-outline</v-icon
                 >
                 <v-icon color="error" @click="openDialog(subCategory)"
@@ -85,14 +88,15 @@
                     </v-text-field>
                     <v-select
                       v-model="select"
-                      :hint="`${select.name}, ${select.id}`"
+                      :hint="`${select.name}, ${select.slug}`"
                       :items="categories"
                       item-text="name"
-                      item-value="id"
+                      item-value="slug"
                       label="Choisir une catégorie"
                       persistent-hint
                       return-object
                       single-line
+                    :value="singleEditSubCategory.id_category"
                     ></v-select>
                   </v-form>
                 </v-col>
@@ -107,7 +111,7 @@
             <v-btn
               color="blue darken-1"
               text
-              @click="editCategory()"
+              @click="aditSubCategory()"
               :loading="isLoading"
             >
               Modifier
@@ -130,7 +134,7 @@
 
 <script>
 export default {
-  props: ["subCategories", 'categories'],
+  props: ["subCategories", "categories"],
 
   data() {
     return {
@@ -145,43 +149,45 @@ export default {
       errors: {},
       form: {
         name: "",
+        id_category: "",
       },
       select: { name: "Cétégorie", id: "0" },
     };
   },
   methods: {
-    editCategory() {
-      axios
-        .put(
+    aditSubCategory: async function () {
+      try {
+        this.form.id_category = this.select.slug;
+        let response = await axios.put(
           "/sub-category/" + this.singleEditSubCategory.slug + "/update",
           this.singleEditSubCategory
-        )
-        .then((res) => {
-          console.log(res);
-          this.message = res.data.message;
+        );
+        if (response.status == 200) {
+          this.message = response.data.message;
           this.snackbar = true;
           this.editDialog = false;
           this.$emit("reloadlist");
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
 
-    removeSubCategory() {
-      axios
-        .delete("/sub-category/" + this.singleEditSubCategory.slug + "/delete")
-        .then((res) => {
-          console.log(res);
+    removeSubCategory: async function() {
+      try {
+        let response = await axios.delete(
+          "/sub-category/" + this.singleEditSubCategory.slug + "/delete"
+        );
+        if (response.status == 200) {
+          console.log(response);
           this.dialog = false;
           this.snackbar = true;
-          this.message = res.data.message;
+          this.message = response.data.message;
           this.$emit("reloadlist");
-          this.$store.dispatch("getCategories");
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     openDialog(subCategory) {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <v-form ref="form">
       <v-container>
         <div class="text-right" id="form">
@@ -18,10 +18,10 @@
             <v-col cols="12" md="4">
               <v-select
                 v-model="select"
-                :hint="`${select.name}, ${select.id}`"
+                :hint="`${select.name}, ${select.slug}`"
                 :items="categories"
                 item-text="name"
-                item-value="id"
+                item-value="slug"
                 label="Choisir une catégorie"
                 persistent-hint
                 return-object
@@ -65,47 +65,37 @@ export default {
     return {
       form: {
         name: "",
-        id_category: null,
+        id_category: "",
       },
       errors: {},
       isLoading: false,
       snackbar: false,
       message: "",
-      select: { name: "Cétégorie", id: "0" },
+      select: { name: "Cétégorie", slug: 'default' },
     };
   },
 
   methods: {
-    addSubCategory() {
+    addSubCategory: async function() {
       this.isLoading = true;
-      this.form.id_category = this.select.id;
-
-      // if (this.form.name == "") {
-      //   return;
-      // }
-
-      axios
-        .post("/sub-category/store", this.form)
-        .then((res) => {
-          this.form.id_category = null;
-          console.log(res);
-          this.message = res.data.message;
+      this.form.id_category = this.select.slug;
+      try
+      {
+        let response = await axios.post("/sub-category/store", this.form);
+        if(response.status == 200) {
+          console.log(response);
+          this.message = response.data.message;
           this.snackbar = true;
-          this.$emit("reloadlist");
+          this.isLoading = false;
           this.$refs.form.reset();
           this.$refs.form.resetValidation();
           this.$emit("reloadlist");
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.status == 422) {
-            console.log("errors......");
-          }
-          this.errors = error.response.errors;
-        })
-        .finally(() => {
-          this.isLoading = false;
-        });
+        }
+      } catch(error) {
+        console.log(error);
+        this.isLoading = false;
+        this.errors = error.response.errors;
+      }
     },
   },
 };
