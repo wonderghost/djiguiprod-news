@@ -6,6 +6,7 @@ import ArticleDetail from './components/front/ArticleDetail.vue';
 import Category from './components/admin/category/Category.vue';
 import Dashboard from './components/admin/Dashboard.vue';
 import SubCategory from './components/admin/subCategory/SubCategory.vue';
+import User from "./components/admin/users/User.vue";
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,10 @@ const router = new VueRouter({
         {
             path: '/sous-categorie',
             component: SubCategory,
+        },
+        {
+            path: '/users',
+            component: User,
         }
     ],
 })

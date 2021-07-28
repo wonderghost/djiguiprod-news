@@ -8,7 +8,7 @@
           </v-list-item-title>
         </v-list-item>
         <v-list nav dense>
-          <v-list-item-group v-model="selectedItem" color="deep-purple">
+          <v-list-item-group v-model="selectedItem" color="primary">
             <v-list-item v-for="(item, i) in items" :key="i" :to="item.route">
               <v-list-item-icon>
                 <v-icon>{{ item.icon }}</v-icon>
@@ -37,7 +37,7 @@
               </v-badge>
               <h4 class="grey--text">{{ user.name }}</h4>
               <p>{{ user.email }}</p>
-              <v-btn color="deep-purple white--text"> Déconnexion </v-btn>
+              <v-btn color="primary white--text"> Déconnexion </v-btn>
             </v-card>
           </div>
         </template>
@@ -78,7 +78,7 @@ export default {
       selectedItem: 0,
       items: [
         { icon: "mdi-view-dashboard", text: "Dashboard", route: "/dashboard" },
-        { icon: "mdi-file", text: "Articles", route: "/article" },
+        { icon: "mdi-file", text: "Articles", route: "/dashboard" },
         {
           icon: "mdi-briefcase-variant",
           text: "Catégories",
@@ -92,7 +92,7 @@ export default {
         {
           icon: "mdi-account-supervisor",
           text: "Redacteurs",
-          route: "/article",
+          route: "/users",
         },
       ],
     };

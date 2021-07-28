@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +25,8 @@ Route::get('/', function () {
 
 Route::get('/login',[Auth\LoginController::class,'index'])->middleware('guest');
 Route::post('/login',[Auth\LoginController::class,'login']);
+Route::post('/create-user', [Auth\LoginController::class, 'createUser']);
+Route::get('/users', [Auth\LoginController::class, 'users']);
 Route::get('/user', function() {
     return request()->user();
 })->middleware('auth');
