@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\ErrorException;
 use App\Models\Article;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -38,7 +40,48 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try 
+        {
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+                'id_sub_category' => 'required',
+                'image' => 'required'
+            ]);
+
+            if(!$request->hasFile('image')) {
+                throw new ErrorException("Aucune image trouvée.");
+            }
+
+            $slug = Str::slug($request->name);
+            $testSlug = Article::find($slug);
+
+            if($testSlug) {
+                throw new ErrorException("Cet article existe déjà.");
+            }
+
+            $path = Str::random(10).time(). '.'.$request->image->extension();
+
+
+            $article = new Article;
+            $article->name = $request->name;
+            $article->makeSlug();
+            $article->description = $request->description;
+            $article->author = request()->user()->email;
+            $article->id_sub_category = $request->id_sub_category;
+            $article->image = $path;
+
+            if($request->file('image')->move(config('uploads.path'), $path)) {
+                $article->save();
+                return response()->json($article, 200);
+            }
+
+            throw new ErrorException("Aucun traitement n'a été effectué.");
+
+        } catch(ErrorException $e) {
+            header('Erreur', true, 422);
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**

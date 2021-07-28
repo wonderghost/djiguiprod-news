@@ -10,7 +10,7 @@
             <v-img
                class="white--text align-end"
                height="215"
-               src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
+               :src="'/uploads/' + article.image">
                <v-card-title>{{ article.name }}</v-card-title>
             </v-img>
          </v-card>

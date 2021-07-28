@@ -46,6 +46,10 @@ class LoginController extends Controller
         }
     }
 
+    public function logout() {
+
+    }
+
     public function createUser(Request $request) 
     {
         try 
@@ -53,7 +57,7 @@ class LoginController extends Controller
             $request->validate([
                 'name' => 'required',
                 'phone' => 'required',
-                'email' => 'required',
+                'email' => ['required', 'email'],
                 'role' => 'required',
             ]);
 

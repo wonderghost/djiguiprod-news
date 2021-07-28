@@ -80,8 +80,7 @@ export default {
         this.form._token = this._token;
         let response = await axios.post("/login", this.form);
         if (response.status == 200) {
-          // location.reload()
-          this.$router.push("/");
+          location.reload()
         }
       } catch (error) {
         this.$store.commit("loading", false);

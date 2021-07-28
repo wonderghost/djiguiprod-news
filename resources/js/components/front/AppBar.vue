@@ -78,7 +78,7 @@ export default {
       selectedItem: 0,
       items: [
         { icon: "mdi-view-dashboard", text: "Dashboard", route: "/dashboard" },
-        { icon: "mdi-file", text: "Articles", route: "/dashboard" },
+        { icon: "mdi-file", text: "Articles", route: "/articles" },
         {
           icon: "mdi-briefcase-variant",
           text: "Catégories",
