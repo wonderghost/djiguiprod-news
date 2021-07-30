@@ -61,3 +61,11 @@ Route::prefix('client')->group(function() {
     Route::put('/{slug}/update', [ClientBannerController::class, 'update']);
     Route::delete('/{slug}/delete', [ClientBannerController::class, 'destroy']);
 });
+
+Route::prefix('bannier')->group(function() {
+    Route::get('', [BannierController::class, 'index']);
+    Route::post('/store', [BannierController::class, 'store']);
+    Route::get('/{slug}/show', [BannierController::class, 'show']);
+    Route::put('/{slug}/update', [BannierController::class, 'update']);
+    Route::delete('/{slug}/delete', [BannierController::class, 'destroy']);
+});
