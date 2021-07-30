@@ -53,3 +53,11 @@ Route::prefix('article')->group(function() {
     Route::put('/{slug}/update', [ArticleController::class, 'update']);
     Route::delete('/{slug}/delete', [ArticleController::class, 'destroy']);
 });
+
+Route::prefix('client')->group(function() {
+    Route::get('', [ClientBannerController::class, 'index']);
+    Route::post('/store', [ClientBannerController::class, 'store']);
+    Route::get('/{slug}/show', [ClientBannerController::class, 'show']);
+    Route::put('/{slug}/update', [ClientBannerController::class, 'update']);
+    Route::delete('/{slug}/delete', [ClientBannerController::class, 'destroy']);
+});
