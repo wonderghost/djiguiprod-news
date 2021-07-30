@@ -90,9 +90,14 @@ export default {
           route: "/sous-categorie",
         },
         {
-          icon: "mdi-account-supervisor",
+          icon: "mdi-account-supervisor-circle",
           text: "Redacteurs",
           route: "/users",
+        },
+        {
+          icon: "mdi-account-supervisor",
+          text: "Clients",
+          route: "/clients",
         },
       ],
     };

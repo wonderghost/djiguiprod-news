@@ -8,6 +8,7 @@ import Dashboard from './components/admin/Dashboard.vue';
 import SubCategory from './components/admin/subCategory/SubCategory.vue';
 import User from "./components/admin/users/User.vue";
 import AddArticle from './components/admin/article/AddArticle.vue';
+import Client from './components/admin/client/Client.vue';
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,10 @@ const router = new VueRouter({
         {
             path: '/articles',
             component: AddArticle,
+        },
+        {
+            path: '/clients',
+            component: Client,
         }
     ],
 })
