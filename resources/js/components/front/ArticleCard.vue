@@ -11,7 +11,7 @@
                class="white--text align-end"
                height="215"
                :src="'/uploads/' + article.image">
-               <v-card-title>{{ article.name }}</v-card-title>
+               <v-card-title class="text--primary">{{ article.name }}</v-card-title>
             </v-img>
          </v-card>
       </v-hover> 

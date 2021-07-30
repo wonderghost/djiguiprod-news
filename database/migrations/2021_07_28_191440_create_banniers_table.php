@@ -15,7 +15,12 @@ class CreateBanniersTable extends Migration
     {
         Schema::create('banniers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('image');
             $table->timestamps();
+
+            $table->unsignedBigInteger('id_client');
+            $table->foreign('id_client')->references('id')->on('client_banners');
         });
     }
 
