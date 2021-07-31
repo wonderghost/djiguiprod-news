@@ -10,6 +10,7 @@ import User from "./components/admin/users/User.vue";
 import AddArticle from './components/admin/article/AddArticle.vue';
 import Client from './components/admin/client/Client.vue';
 import Banner from './components/admin/banner/Banner.vue';
+import Article from './components/admin/article/Article.vue';
 
 Vue.use(VueRouter)
 
@@ -49,6 +50,10 @@ const router = new VueRouter({
         },
         {
             path: '/articles',
+            component: Article,
+        },
+        {
+            path: '/add-article',
             component: AddArticle,
         },
         {

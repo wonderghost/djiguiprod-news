@@ -12,6 +12,7 @@ const store = new Vuex.Store({
         categories: [],
         clients: [],
         banners: [],
+        articles: []
     },
     mutations : {
         loading(state,value)
@@ -32,6 +33,9 @@ const store = new Vuex.Store({
         },
         setBanners(state, value) {
             state.banners = value;
+        },
+        setArticles(state, value) {
+            state.articles = value;
         }
     },
 
@@ -66,6 +70,14 @@ const store = new Vuex.Store({
             }();
             response.then(results => {
                 context.commit('setBanners', results.data);
+            })
+        },
+        getArticles(context) {
+            let response = async function() {
+                return await axios.get('article');
+            }();
+            response.then(results => {
+                context.commit('setArticles', results.data);
             })
         }
     }

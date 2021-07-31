@@ -1,7 +1,26 @@
 <template>
   <div>
+    <h1 class="text-center my-4">Ajouter un article</h1>
     <v-form>
       <v-text-field v-model="form.name" label="Titre" required></v-text-field>
+      <v-row>
+        <v-col cols="12" md="6">
+          <v-autocomplete
+            v-model="form.id_sub_category"
+            :items="subCategories"
+            label="Sous categorie"
+            item-text="name"
+            item-value="slug"
+          ></v-autocomplete>
+        </v-col>
+        <v-col cols="12" md="6">
+          <v-file-input
+            @change="updloadFile"
+            accept="image/*"
+            label="Image de couverture"
+          ></v-file-input>
+        </v-col>
+      </v-row>
       <quill-editor
         ref="myTextEditor"
         v-model="form.description"
@@ -9,20 +28,20 @@
         :config="editorOption"
       >
       </quill-editor>
-      <v-file-input
-        @change="updloadFile"
-        accept="image/*"
-        label="Image de couverture"
-      ></v-file-input>
-      <v-autocomplete
-        v-model="form.id_sub_category"
-        :items="subCategories"
-        label="Sous categorie"
-        item-text="name"
-        item-value="slug"
-      ></v-autocomplete>
 
-      <v-btn @click="saveArticle">Valider</v-btn>
+      <div style="text-align: center" class="my-4">
+        <v-btn
+          rounded
+          dark
+          color="primary"
+          class="mb-5"
+          @click="saveArticle()"
+          :loading="isLoading"
+        >
+          <v-icon>mdi-plus</v-icon>
+          Ajouter
+        </v-btn>
+      </div>
     </v-form>
   </div>
 </template>
@@ -39,14 +58,15 @@ export default {
 
   data() {
     return {
-        select: null,
+      select: null,
+      isLoading: false,
       form: {
         name: "",
         description: "",
         image: "",
         author: "",
         id_sub_category: null,
-        _token: null
+        _token: null,
       },
       editorOption: {},
       subCategories: [],
@@ -56,34 +76,34 @@ export default {
   methods: {
     updloadFile(e) {
       console.log(e.target);
-      this.form.image = e
+      this.form.image = e;
     },
 
-    saveArticle: async function() {
-        try
-        {
-            this.form._token = this.token
-            this.form.author = this.user.id;
+    saveArticle: async function () {
+      try {
+        this.form._token = this.token;
+        this.form.author = this.user.id;
 
-            let formData = new FormData;
-            formData.append('image', this.form.image);
-            formData.append('name', this.form.name);
-            formData.append('description', this.form.description);
-            formData.append('author', this.form.author);
-            formData.append('id_sub_category', this.form.id_sub_category);
-            formData.append('_token', this.form._token);
+        let formData = new FormData();
+        formData.append("image", this.form.image);
+        formData.append("name", this.form.name);
+        formData.append("description", this.form.description);
+        formData.append("author", this.form.author);
+        formData.append("id_sub_category", this.form.id_sub_category);
+        formData.append("_token", this.form._token);
 
-            let response = await axios.post('/article/store', formData, {
-                Headers: {
-                    'Content-type': 'multipart/form-data'
-                }
-            });
-            if(response.status == 200) {
-                console.log(response);
-            }
-        } catch(error) {
-            console.log(error);
+        let response = await axios.post("/article/store", formData, {
+          Headers: {
+            "Content-type": "multipart/form-data",
+          },
+        });
+        if (response.status == 200) {
+          console.log(response);
+          this.$router.push('/articles')
         }
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     getSubCategories: async function () {
@@ -102,16 +122,16 @@ export default {
 
   mounted() {
     this.getSubCategories();
-    this.$store.dispatch('actifUser')
+    this.$store.dispatch("actifUser");
   },
 
   computed: {
-      user() {
-          return this.$store.state.user
-      },
-      token() {
-          return this.$store.state._token
-      }
-  }
+    user() {
+      return this.$store.state.user;
+    },
+    token() {
+      return this.$store.state._token;
+    },
+  },
 };
 </script>
