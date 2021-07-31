@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ErrorException;
-use App\Models\Bannier;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class BannierController extends Controller
+class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class BannierController extends Controller
     {
         try
         {
-            return response()->json(Bannier::all(), 200);
+            return response()->json(Banner::all(), 200);
         }
         catch(ErrorException $e) {
             header('Erreur', true, 422);
@@ -47,7 +47,7 @@ class BannierController extends Controller
 
             $path = Str::random(10).time(). '.'.$request->image->extension();
 
-            $banner = new Bannier;
+            $banner = new Banner;
             $banner->name = $request->name;
             $banner->id_client = $request->id_client;
             $banner->image = $path;
@@ -93,7 +93,7 @@ class BannierController extends Controller
     {
         try
         {
-            $banner = Bannier::find($id);
+            $banner = Banner::find($id);
 
             if($banner) {
                 $request->validate([
@@ -108,7 +108,7 @@ class BannierController extends Controller
 
                 $path = Str::random(10).time(). '.'.$request->image->extension();
 
-                $banner = new Bannier;
+                $banner = new Banner;
                 $banner->name = $request->name;
                 $banner->id_client = $request->id_client;
                 $banner->image = $path;
@@ -145,7 +145,7 @@ class BannierController extends Controller
     {
         try
         {
-            $banner = Bannier::find($id);
+            $banner = Banner::find($id);
 
             if($banner) {
                 $banner->delete();

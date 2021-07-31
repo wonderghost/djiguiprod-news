@@ -189,7 +189,7 @@ export default {
           this.message = response.data.message;
           this.snackbar = true;
           this.editDialog = false;
-          this.$emit("reloadlist");
+          this.$store.dispatch('getClients');
         }
       } catch (error) {
         console.log(error);
@@ -210,7 +210,7 @@ export default {
           this.message = respose.data.message;
           this.dialog = false;
           this.snackbar = true;
-          this.$emit("reloadlist");
+          this.$store.dispatch('getClients');
         }
       } catch (error) {
         console.log(error);

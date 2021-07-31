@@ -99,7 +99,7 @@ export default {
           this.isLoading = false;
           this.$refs.form.reset();
           this.$refs.form.resetValidation();
-          this.$emit("reloadlist")
+          this.$store.dispatch('getClients');
         }
       } catch (error) {
         console.log(error);

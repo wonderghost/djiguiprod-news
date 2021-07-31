@@ -63,9 +63,9 @@ Route::prefix('client')->group(function() {
 });
 
 Route::prefix('banner')->group(function() {
-    Route::get('', [BannierController::class, 'index']);
-    Route::post('/store', [BannierController::class, 'store']);
-    Route::get('/{slug}/show', [BannierController::class, 'show']);
-    Route::put('/{slug}/update', [BannierController::class, 'update']);
-    Route::delete('/{slug}/delete', [BannierController::class, 'destroy']);
+    Route::get('', [BannerController::class, 'index']);
+    Route::post('/store', [BannerController::class, 'store']);
+    Route::get('/{slug}/show', [BannerController::class, 'show']);
+    Route::put('/{slug}/update', [BannerController::class, 'update']);
+    Route::delete('/{slug}/delete', [BannerController::class, 'destroy']);
 });

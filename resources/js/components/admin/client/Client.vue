@@ -2,9 +2,9 @@
   <div>
     <h1>Liste des clients</h1>
 
-    <AddClient v-on:reloadlist="getClients()" />
+    <AddClient/>
 
-    <ListClient :clients="clients" v-on:reloadlist="getClients()"/>
+    <ListClient :clients="clients"/>
     
   </div>
 </template>
@@ -20,29 +20,18 @@ export default {
   data() {
     return {
       search: "",
-      clients: []
     };
   },
   methods: {
-    getClients: async function() {
-        try
-        {
-            let response = await axios.get('/client');
-            if(response.status == 200) {
-                this.clients = response.data;
-                console.log(this.clients);
-            }
-        } 
-        catch(error) {
-            console.log(error);
-        }
-    }
+    //
   },
   mounted() {
-    this.getClients();
+    this.$store.dispatch('getClients');
   },
   computed: {
-      //
+      clients() {
+        return this.$store.state.clients;
+      }
   }
 };
 </script>
