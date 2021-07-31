@@ -54,7 +54,13 @@ class BannierController extends Controller
 
             if($request->file('image')->move(config('uploads.path'), $path)) {
                 $banner->save();
-                return response()->json($banner, 200);
+
+                $response = [
+                    'data' => $banner,
+                    'message' => $banner->name . " ajouté(e) avec succès."
+                ];
+
+                return response()->json($response, 200);
             }
 
             throw new ErrorException("Aucun traitement n'a été effectué.");
@@ -85,7 +91,48 @@ class BannierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try
+        {
+            $banner = Bannier::find($id);
+
+            if($banner) {
+                $request->validate([
+                    'name' => 'required',
+                    'image' => 'required',
+                    'id_client' => 'required'
+                ]);
+    
+                if(!$request->hasFile('image')) {
+                    throw new ErrorException("Il n'y a pas d'image");
+                }
+
+                $path = Str::random(10).time(). '.'.$request->image->extension();
+
+                $banner = new Bannier;
+                $banner->name = $request->name;
+                $banner->id_client = $request->id_client;
+                $banner->image = $path;
+                
+                if($request->file('image')->move(config('uploads.path'), $path)) {
+                    $banner->save();
+
+                    $response = [
+                        'data' => $banner,
+                        'message' => $banner->name . " modifié(e) avec succès."
+                    ];
+    
+                    return response()->json($response, 200);
+                }
+
+                throw new ErrorException("Aucun traitement n'a été effectué.");
+            }
+            
+            throw new ErrorException("Cette bannière n'existe pas.", 422);
+        }
+        catch(ErrorException $e) {
+            header("Erreur", true, 422);
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
@@ -96,6 +143,24 @@ class BannierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try
+        {
+            $banner = Bannier::find($id);
+
+            if($banner) {
+                $banner->delete();
+                $response = [
+                    'message' => $banner->name . ' supprimé(e) avec succès.'
+                ];
+                return response()->json($response, 200);
+            }
+
+            throw new ErrorException("Cette bannière n'existe pas.", 422);
+        }
+        catch(ErrorException $e) 
+        {
+            header("Erreur", true, 422);
+            return response()->json($e->getMessage(), 422);
+        }
     }
 }

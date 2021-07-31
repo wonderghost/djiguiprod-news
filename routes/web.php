@@ -62,7 +62,7 @@ Route::prefix('client')->group(function() {
     Route::delete('/{slug}/delete', [ClientBannerController::class, 'destroy']);
 });
 
-Route::prefix('bannier')->group(function() {
+Route::prefix('banner')->group(function() {
     Route::get('', [BannierController::class, 'index']);
     Route::post('/store', [BannierController::class, 'store']);
     Route::get('/{slug}/show', [BannierController::class, 'show']);

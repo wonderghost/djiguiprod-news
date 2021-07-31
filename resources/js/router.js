@@ -9,6 +9,7 @@ import SubCategory from './components/admin/subCategory/SubCategory.vue';
 import User from "./components/admin/users/User.vue";
 import AddArticle from './components/admin/article/AddArticle.vue';
 import Client from './components/admin/client/Client.vue';
+import Banner from './components/admin/banner/Banner.vue';
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,10 @@ const router = new VueRouter({
         {
             path: '/clients',
             component: Client,
+        },
+        {
+            path: '/banner',
+            component: Banner,
         }
     ],
 })

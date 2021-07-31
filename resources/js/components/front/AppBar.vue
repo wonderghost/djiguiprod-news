@@ -99,6 +99,11 @@ export default {
           text: "Clients",
           route: "/clients",
         },
+        {
+          icon: "mdi-account-supervisor",
+          text: "Banniere pub",
+          route: "/banner",
+        },
       ],
     };
   },
