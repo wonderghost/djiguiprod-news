@@ -2,7 +2,13 @@
   <div>
     <h1>Liste des articles</h1>
 
-    <!-- <AddArticle/> -->
+    <div style="text-align: right">
+      <v-btn rounded dark color="primary" class="mb-5"
+        @click="addArticle()">
+        <v-icon>mdi-plus</v-icon>
+        Ajouter
+      </v-btn>
+    </div>
 
     <ListArticle :articles="articles"/>
     
@@ -23,7 +29,9 @@ export default {
     };
   },
   methods: {
-    
+    addArticle() {
+      return this.$router.push('/add-article');
+    },
   },
   mounted() {
     this.$store.dispatch("getArticles");

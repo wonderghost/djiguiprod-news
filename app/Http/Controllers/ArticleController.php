@@ -19,7 +19,7 @@ class ArticleController extends Controller
     {
         try
         {
-            $articles = Article::orderBy('created_at', 'DESC')->limit(30)->get();
+            $articles = Article::orderBy('created_at', 'DESC')->where('deleted', false)->limit(30)->get();
             foreach($articles as $value) {
                 $value->category = $value->subCategories()->category()->only('slug', 'name'); 
             }
@@ -113,9 +113,46 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $slug)
     {
-        //
+        try
+        {
+            $article = Article::where('slug', '=', $slug)->first();
+            if($article) {
+                $request->validate([
+                    'name' => 'required',
+                    'description' => 'required',
+                    'id_sub_category' => 'required',
+                    'image' => 'required'
+                ]);
+    
+                if(!$request->hasFile('image')) {
+                    throw new ErrorException("Aucune image trouvée.");
+                }
+    
+                $path = Str::random(10).time(). '.'.$request->image->extension();
+    
+    
+                $article = new Article;
+                $article->name = $request->name;
+                $article->description = $request->description;
+                $article->author = request()->user()->email;
+                $article->id_sub_category = $request->id_sub_category;
+                $article->image = $path;
+    
+                if($request->file('image')->move(config('uploads.path'), $path)) {
+                    $article->save();
+                    return response()->json($article, 200);
+                }
+    
+                throw new ErrorException("Aucun traitement n'a été effectué.");
+            }
+            throw new ErrorException("Cet article n'existe pas.", 422);
+        } catch(ErrorException $e)
+        {
+            header('Erreur', true, 422);
+            return response()->json($e->getMessage(), 422);
+        }
     }
 
     /**
@@ -124,8 +161,27 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(string $slug)
     {
-        //
+        try
+        {
+            $article = Article::where('slug', $slug)->first();
+
+            if($article) 
+            {
+                $article->deleted = true;
+                $article->save();
+
+                $response = [
+                    'message' => "Suppression effectué avec succès",
+                ];
+
+                return response()->json($response, 200);
+            }
+            throw new ErrorException("Cet article n'existe pas dans le système");
+        } catch(ErrorException $e) {
+            header('Erreur', true, 422);
+            return response()->json($e->getMessage(), 422);
+        }
     }
 }

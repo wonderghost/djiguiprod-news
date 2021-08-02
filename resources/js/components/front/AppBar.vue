@@ -100,7 +100,7 @@ export default {
           route: "/clients",
         },
         {
-          icon: "mdi-account-supervisor",
+          icon: "mdi-publish",
           text: "Banniere pub",
           route: "/banner",
         },

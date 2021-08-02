@@ -1,16 +1,6 @@
 <template>
   <div class="mb-10">
-    <v-btn
-      rounded
-      dark
-      color="primary"
-      class="mb-5"
-      @click="addArticle()"
-      :loading="isLoading"
-    >
-      <v-icon>mdi-plus</v-icon>
-      Ajouter
-    </v-btn>
+    
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -27,7 +17,6 @@
           <tr v-for="(article, index) in articles" :key="index">
             <td class="text-center">{{ index + 1 }}</td>
             <td class="text-center">{{ article.name }}</td>
-            <td class="text-center">{{ article.author }}</td>
             <td class="text-center">
               <v-img
                 max-height="80"
@@ -35,16 +24,17 @@
                 :src="'/uploads/' + article.image"
               ></v-img>
             </td>
+            <td class="text-center">{{ article.deleted }}</td>
             <td class="text-center">{{ article.created_at | formatDate }}</td>
             <td class="text-center">
               <p>
                 <v-icon
                   color="success"
                   class="mx-3"
-                  @click="openEditDialog(category)"
+                  @click="updateArticle(article)"
                   >mdi-circle-edit-outline</v-icon
                 >
-                <v-icon color="error" @click="openDialog(category)"
+                <v-icon color="error" @click="openDialog(article)"
                   >mdi-delete</v-icon
                 >
               </p>
@@ -74,54 +64,13 @@
             <v-btn
               color="green darken-1"
               text
-              @click="removeCategory()"
+              @click="removeArticle()"
               :loading="isLoading"
             >
               Oui, supprimer
             </v-btn>
             <v-btn color="error darken-1" text @click="dialog = false">
               Annuler
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-row>
-
-    <v-row justify="center">
-      <v-dialog v-model="editDialog" persistent max-width="350">
-        <v-card>
-          <v-card-title>
-            <span class="text-h5">Modifier la catégorie</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-row>
-                <v-col cols="12">
-                  <v-form>
-                    <v-text-field
-                      label="Nom de la catégorie"
-                      :value="singleEditCategory.name"
-                      v-model="singleEditCategory.name"
-                      required
-                    >
-                    </v-text-field>
-                  </v-form>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="red darken-1" text @click="editDialog = false">
-              Fermer
-            </v-btn>
-            <v-btn
-              color="blue darken-1"
-              text
-              @click="editCategory()"
-              :loading="isLoading"
-            >
-              Modifier
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -146,22 +95,16 @@ export default {
   data() {
     return {
       dialog: false,
-      editDialog: false,
-      singleEditCategory: {},
-      singleCategory: {},
+      singleArticle: {},
       message: "",
       name: "",
       isLoading: false,
       snackbar: false,
-      errors: {},
-      form: {
-        name: "",
-      },
     };
   },
   methods: {
-    addArticle() {
-      return this.$router.push('/add-article');
+    updateArticle(article) {
+      return this.$router.push("articles/update/" + article.slug);
     },
 
     editCategory: async function () {
@@ -187,11 +130,11 @@ export default {
       }
     },
 
-    removeCategory: async function () {
+    removeArticle: async function () {
       this.isLoading = true;
       try {
         let respose = await axios.delete(
-          "/category/" + this.singleCategory.slug + "/delete"
+          "/article/" + this.singleArticle.slug + "/delete"
         );
         if (respose.status == 200) {
           console.log(respose);
@@ -199,7 +142,7 @@ export default {
           this.message = respose.data.message;
           this.dialog = false;
           this.snackbar = true;
-          this.$store.dispatch("getCategories");
+          this.$store.dispatch("getArticles");
         }
       } catch (error) {
         console.log(error);
@@ -211,7 +154,7 @@ export default {
     openDialog(category) {
       this.dialog = true;
       this.name = category.name;
-      this.singleCategory = category;
+      this.singleArticle = category;
     },
 
     openEditDialog(category) {
