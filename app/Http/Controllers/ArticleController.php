@@ -125,7 +125,7 @@ class ArticleController extends Controller
                     'id_sub_category' => 'required',
                     'image' => 'required'
                 ]);
-    
+
                 if(!$request->hasFile('image')) {
                     throw new ErrorException("Aucune image trouvée.");
                 }
@@ -140,6 +140,8 @@ class ArticleController extends Controller
                 $article->id_sub_category = $request->id_sub_category;
                 $article->image = $path;
     
+                
+
                 if($request->file('image')->move(config('uploads.path'), $path)) {
                     $article->save();
                     return response()->json($article, 200);

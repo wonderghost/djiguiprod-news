@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <v-form ref="form">
       <v-container>
         <div class="text-right" id="form">
@@ -16,17 +16,13 @@
             </v-col>
 
             <v-col cols="12" md="4">
-              <v-select
-                v-model="select"
-                :hint="`${select.name}, ${select.slug}`"
+              <v-autocomplete
+                v-model="form.id_category"
                 :items="categories"
+                label="Categorie"
                 item-text="name"
                 item-value="slug"
-                label="Choisir une catégorie"
-                persistent-hint
-                return-object
-                single-line
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
 
             <v-col cols="12" md="2">
@@ -60,31 +56,29 @@
 
 <script>
 export default {
-  props:['categories'],
+  props: ["categories"],
   data() {
     return {
       form: {
         name: "",
         id_category: "",
-        _token: ""
+        _token: "",
       },
       errors: {},
       isLoading: false,
       snackbar: false,
       message: "",
-      select: { name: "Cétégorie", slug: 'default' },
+      select: { name: "Cétégorie", slug: "default" },
     };
   },
 
   methods: {
-    addSubCategory: async function() {
+    addSubCategory: async function () {
       this.isLoading = true;
-      this.form.id_category = this.select.slug;
-      try
-      {
+      try {
         this.form._token = this.token;
         let response = await axios.post("/sub-category/store", this.form);
-        if(response.status == 200) {
+        if (response.status == 200) {
           console.log(response);
           this.message = response.data.message;
           this.snackbar = true;
@@ -93,7 +87,7 @@ export default {
           this.$refs.form.resetValidation();
           this.$emit("reloadlist");
         }
-      } catch(error) {
+      } catch (error) {
         console.log(error);
         this.isLoading = false;
         this.errors = error.response.errors;
@@ -102,8 +96,8 @@ export default {
   },
   computed: {
     token() {
-      return this.$store.state._token
-    }
-  }
+      return this.$store.state._token;
+    },
+  },
 };
 </script>

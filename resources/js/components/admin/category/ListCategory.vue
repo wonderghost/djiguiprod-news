@@ -144,7 +144,6 @@ export default {
           this.message = response.data.message;
           this.snackbar = true;
           this.editDialog = false;
-          this.editCategory = false;
           this.$store.dispatch('getCategories');
         }
       } catch(error) {

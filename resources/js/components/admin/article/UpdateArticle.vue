@@ -2,11 +2,11 @@
   <div>
     <h1 class="text-center my-4">Modifier l'article "{{ article.name }}"</h1>
     <v-form>
-      <v-text-field label="Titre" v-model="form.name" required ></v-text-field>
+      <v-text-field label="Titre" v-model="article.name" required ></v-text-field>
       <v-row>
         <v-col cols="12" md="6">
           <v-autocomplete
-            v-model="form.id_sub_category"
+            v-model="article.id_sub_category"
             :items="subCategories"
             label="Sous categorie"
             item-text="name"
@@ -18,13 +18,12 @@
             @change="updloadFile"
             accept="image/*"
             label="Image de couverture"
-            :v-model="form.image"
           ></v-file-input>
         </v-col>
       </v-row>
       <quill-editor
         ref="myTextEditor"
-        v-model="form.description"
+        v-model="article.description"
         label="Description"
         :config="editorOption"
       >
@@ -91,24 +90,28 @@ export default {
     },
 
     updloadFile(e) {
-      console.log(e.target);
-      this.form.image = e;
+      console.log(e);
+      this.article.image = e;
     },
 
     editArticle: async function () {
       try {
-        this.form._token = this.token;
-        this.form.author = this.user.id;
+        this.article._token = this.token;
+        this.article.author = this.user.id;
 
-        let formData = new FormData();
-        formData.append("image", this.form.image);
-        formData.append("name", this.form.name);
-        formData.append("description", this.form.description);
-        formData.append("author", this.form.author);
-        formData.append("id_sub_category", this.form.id_sub_category);
-        formData.append("_token", this.form._token);
+        console.log(this.article)
 
-        let response = await axios.put("/article/" + this.$route.params.slug + "/update", formData, {
+        let data = new FormData();
+        data.append("image", this.article.image);
+        data.append("name", this.article.name);
+        data.append("description", this.article.description);
+        data.append("author", this.article.author);
+        data.append("id_sub_category", this.article.id_sub_category);
+        data.append("_token", this.article._token);
+
+        console.log(data);
+
+        let response = await axios.put("/article/" + this.$route.params.slug + "/update", data, {
           Headers: {
             "Content-type": "multipart/form-data",
           },
@@ -137,7 +140,7 @@ export default {
 
   mounted() {
     this.getArticle();
-    console.log(this.article);
+    // console.log(this.article);
     this.getSubCategories();
     this.$store.dispatch("actifUser");
   },

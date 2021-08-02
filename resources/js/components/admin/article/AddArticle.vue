@@ -75,7 +75,7 @@ export default {
 
   methods: {
     updloadFile(e) {
-      console.log(e.target);
+      console.log(e);
       this.form.image = e;
     },
 

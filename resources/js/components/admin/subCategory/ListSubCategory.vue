@@ -86,18 +86,13 @@
                       required
                     >
                     </v-text-field>
-                    <v-select
-                      v-model="select"
-                      :hint="`${select.name}, ${select.slug}`"
+                    <v-autocomplete
+                      v-model="singleEditSubCategory.id_category"
                       :items="categories"
+                      label="Categorie"
                       item-text="name"
                       item-value="slug"
-                      label="Choisir une catégorie"
-                      persistent-hint
-                      return-object
-                      single-line
-                    :value="singleEditSubCategory.id_category"
-                    ></v-select>
+                    ></v-autocomplete>
                   </v-form>
                 </v-col>
               </v-row>
@@ -173,7 +168,7 @@ export default {
       }
     },
 
-    removeSubCategory: async function() {
+    removeSubCategory: async function () {
       try {
         let response = await axios.delete(
           "/sub-category/" + this.singleEditSubCategory.slug + "/delete"
