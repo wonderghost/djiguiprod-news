@@ -177,13 +177,13 @@ export default {
     editCategory: async function () {
       this.isLoading = true;
       try {
-        // this.form._token = this.token;
+        this.form._token = this.token;
 
         let formData = new FormData;
         formData.append("name", this.singleBanner.name)
         formData.append("id_client", this.singleBanner.id_client)
         formData.append("image", this.singleBanner.image)
-        // formData.append("_token", this.form._token)
+        formData.append("_token", this.form._token)
 
         let response = await axios.put(
           "/banner/" + this.singleBanner.id + "/update",

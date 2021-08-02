@@ -53,6 +53,7 @@ export default {
     return {
       form: {
         name: "",
+        _token: "",
       },
       errors: {},
       isLoading: false,
@@ -65,6 +66,7 @@ export default {
     addCategory: async function() {
       this.isLoading = true;
       try {
+        this.form._token = this.token;
         let response = await axios.post('/category/store', this.form)
         if(response.status == 200) {
           console.log(response);
@@ -82,5 +84,11 @@ export default {
       }
     }
   },
+
+  computed: {
+    token() {
+      return this.$store.state._token
+    }
+  }
 };
 </script>

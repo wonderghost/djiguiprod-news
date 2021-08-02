@@ -78,7 +78,8 @@ export default {
         name: "",
         email: "",
         contact: "",
-        description: ""
+        description: "",
+        _token: ""
       },
       errors: {},
       isLoading: false,
@@ -91,6 +92,7 @@ export default {
     addClient: async function () {
       this.isLoading = true;
       try {
+        this.form._token = this.token;
         let response = await axios.post("/client/store", this.form);
         if (response.status == 200) {
           console.log(response);
@@ -108,5 +110,11 @@ export default {
       }
     },
   },
+
+  computed: {
+    token() {
+      return this.$store.state._token
+    }
+  }
 };
 </script>

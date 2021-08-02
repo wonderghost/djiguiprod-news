@@ -66,6 +66,7 @@ export default {
       form: {
         name: "",
         id_category: "",
+        _token: ""
       },
       errors: {},
       isLoading: false,
@@ -81,6 +82,7 @@ export default {
       this.form.id_category = this.select.slug;
       try
       {
+        this.form._token = this.token;
         let response = await axios.post("/sub-category/store", this.form);
         if(response.status == 200) {
           console.log(response);
@@ -98,5 +100,10 @@ export default {
       }
     },
   },
+  computed: {
+    token() {
+      return this.$store.state._token
+    }
+  }
 };
 </script>

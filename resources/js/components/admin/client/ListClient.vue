@@ -172,6 +172,7 @@ export default {
         email: "",
         contact: "",
         description: "",
+        _token: ""
       },
     };
   },
@@ -179,6 +180,7 @@ export default {
     editClient: async function () {
       this.isLoading = true;
       try {
+        this.form._token = this.token;
         let response = await axios.put(
           "/client/" + this.singleClient.id + "/update",
           this.singleClient
@@ -230,5 +232,10 @@ export default {
       this.singleClient = client;
     },
   },
+  computed: {
+    token() {
+      return this.$store.state._token
+    }
+  }
 };
 </script>

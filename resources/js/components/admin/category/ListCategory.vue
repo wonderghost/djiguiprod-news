@@ -127,6 +127,7 @@ export default {
       errors: {},
       form: {
         name: "",
+        _token: "",
       },
     };
   },
@@ -134,6 +135,7 @@ export default {
     editCategory: async function() {
       this.isLoading = true;
       try {
+        this.form._token = this.token
         let response = await axios.put("/category/" + this.singleEditCategory.slug + "/update",
           this.singleEditCategory);
         if(response.status == 200) {
@@ -182,5 +184,11 @@ export default {
       this.singleEditCategory = category;
     },
   },
+
+  computed: {
+    token() {
+      return this.$store.state._token
+    }
+  }
 };
 </script>

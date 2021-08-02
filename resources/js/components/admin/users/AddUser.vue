@@ -80,6 +80,7 @@ export default {
         email: "",
         role: "",
         phone: "",
+        _token: ""
       },
       errors: {},
       isLoading: false,
@@ -92,6 +93,7 @@ export default {
     addUser: async function () {
       this.isLoading = true;
       try {
+        this.form._token = this.token;
         let response = await axios.post("/create-user", this.form);
         if (response.status == 200) {
           console.log(response);
@@ -109,5 +111,11 @@ export default {
       }
     },
   },
+
+  computed: {
+    token() {
+      return this.$store.state._token
+    }
+  }
 };
 </script>

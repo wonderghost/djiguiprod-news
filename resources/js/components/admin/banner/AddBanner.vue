@@ -71,7 +71,7 @@ export default {
         name: "",
         id_client: null,
         image: "",
-        _token: null
+        _token: ""
       },
       errors: {},
       isLoading: false,
