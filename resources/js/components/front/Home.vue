@@ -2,32 +2,31 @@
   <v-app>
     <v-row>
       <v-col cols="12" md="9" class="mt-6">
-        <v-carousel
-          cycle
-          hide-delimiter-background
-          show-arrows-on-hover
-        >
-          <v-carousel-item v-for="(article, index) in articles.slice(0, 5)" :key="index">
+        <v-carousel cycle hide-delimiter-background show-arrows-on-hover>
+          <v-carousel-item
+            v-for="(article, index) in articles.slice(0, 5)"
+            :key="index"
+          >
             <v-hover v-slot="{ hover }" open-delay="200">
-            <v-card
-              class="mx-auto"
-              max-width="900"
-              max-height="900"
-              :elevation="hover ? 16 : 2"
-              :class="{ 'on-hover': hover }"
-              @click="openDetail(article)"
-            >
-              <v-img
-                class="white--text align-end"
-                height="450px"
-                :src="'/uploads/' + article.image"
+              <v-card
+                class="mx-auto"
+                max-width="900"
+                max-height="900"
+                :elevation="hover ? 16 : 2"
+                :class="{ 'on-hover': hover }"
+                @click="openDetail(article)"
               >
-                <v-card-title class="text--primary">{{
-                  article.name
-                }}</v-card-title>
-              </v-img>
-            </v-card>
-          </v-hover>
+                <v-img
+                  class="white--text align-end"
+                  height="450px"
+                  :src="'/uploads/' + article.image"
+                >
+                  <v-card-title class="text--primary">{{
+                    article.name
+                  }}</v-card-title>
+                </v-img>
+              </v-card>
+            </v-hover>
           </v-carousel-item>
         </v-carousel>
 
@@ -64,31 +63,16 @@
       </v-col>
 
       <v-col cols="12" md="3" class="mt-6">
-          <v-card
-            class="mx-auto mb-4"
-            max-width="600"
-          >
+        <template v-for="(banner, index) in zone2.slice(0, 2)">
+          <v-card class="mx-auto mb-4" max-width="600" :key="index">
             <v-img
               class="white--text align-end"
               height="215"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+              :src="'/uploads/' + banner.image"
             >
-              <v-card-title>Top 10 Australian beaches</v-card-title>
             </v-img>
           </v-card>
-
-          <v-card
-            class="mx-auto"
-            max-width="600"
-          >
-            <v-img
-              class="white--text align-end"
-              height="215"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            >
-              <v-card-title>Top 10 Australian beaches</v-card-title>
-            </v-img>
-          </v-card>
+        </template>
       </v-col>
     </v-row>
 
@@ -144,6 +128,7 @@ export default {
 
   mounted() {
     this.getArticles();
+    this.$store.dispatch("getBanners");
   },
 
   methods: {
@@ -174,6 +159,16 @@ export default {
         return sport.category.slug == "sports";
       });
     },
+
+    banners() {
+      return this.$store.state.banners;
+    },
+
+    zone2() {
+      return this.banners.filter(a => {
+        return a.name == "2";
+      })
+    }
   },
 };
 </script>
