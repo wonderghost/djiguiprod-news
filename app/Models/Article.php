@@ -21,6 +21,11 @@ class Article extends Model
     public function subCategories() {
         return $this->belongsTo(SubCategory::class, 'id_sub_category', 'slug')->first();
     }
+
+    public function user() 
+    {
+        return $this->belongsTo(User::class, 'author', 'email')->first();
+    }
 }
 
 

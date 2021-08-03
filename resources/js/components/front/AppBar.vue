@@ -58,6 +58,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div style="margin-right: 80px">
+        <v-icon color="white" size="20" @click="goHome">mdi-home</v-icon>
         <template v-for="(category, index) in categories">
           <router-link
             :key="index"
@@ -180,6 +181,9 @@ export default {
     },
     openSearch() {
       return this.isSearching = !this.isSearching;
+    },
+    goHome() {
+      this.$router.push('/');
     }
   },
 

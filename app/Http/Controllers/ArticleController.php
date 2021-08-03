@@ -32,6 +32,25 @@ class ArticleController extends Controller
         }
     }
 
+    public function articleByCategory(string $slug)
+    {
+        try
+        {
+            $articles = Article::orderBy('article.created_at', 'DESC')
+            ->join('sub_category', 'article.id_sub_category', "=", "sub_category.slug")
+            ->join('category', 'sub_category.id_category', "=", "category.slug")
+            ->where('category.slug', $slug)
+            ->select('article.slug', 'article.name', 'article.description', 'article.image', 'article.created_at')
+            ->paginate();
+
+            return response()->json($articles, 200);
+        }
+        catch(ErrorException $e) {
+            header('Erreur', true, 422);
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -95,6 +114,8 @@ class ArticleController extends Controller
         try
         {
             $article = Article::where('slug', '=', $slug)->first();
+            $article->userName = $article->user()->name;
+
             if($article) {
                 return response()->json($article, 200);
             }

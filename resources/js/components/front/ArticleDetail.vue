@@ -14,7 +14,7 @@
           <v-card-text class="text--primary">
             <div class="d-flex justify-space-between">
               <p class="text-left">
-                <v-icon>mdi-account</v-icon> Autheur: {{ article.author }}
+                <v-icon>mdi-account</v-icon> Autheur: {{ article.userName }}
               </p>
               <p class="mr-16 text--grey">
                 <v-icon>mdi-clock</v-icon>
@@ -28,7 +28,7 @@
               fab
               v-for="(icon, index) in socialMedia"
               :key="index"
-              class="mx-4 black--text"
+              class="mx-2"
               :href="icon.href + encodeURI(loc)"
             >
             <v-icon :color="icon.color" size="250%">{{ icon.icon }}</v-icon>
@@ -54,13 +54,13 @@ export default {
           icon: "mdi-facebook",
           network: "facebook",
           href: 'https://www.facebook.com/share.php?u=',
-          color: '#00acee'
+          color: '#3b5998' 
         },
         {
           icon: "mdi-twitter",
           network: "Twitter",
           href: 'https://twitter.com/intent/tweet?url=',
-          color: '#3b5998'
+          color: '#00acee'
         },
         {
           icon: "mdi-linkedin",

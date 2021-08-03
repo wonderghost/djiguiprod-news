@@ -24,7 +24,7 @@ export default {
 
    methods: {
       openDetail(a) {
-         this.$router.push('/' + a.category.slug + '/' + a.slug);
+         this.$router.push('/' + a.slug);
       }
    }
 }
