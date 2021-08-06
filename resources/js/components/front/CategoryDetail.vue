@@ -1,5 +1,5 @@
 <template>
-  <div v-if="articles.length > 0">
+  <div>
     <div>
       <v-breadcrumbs :items="items" class="pl-0 my-n4"></v-breadcrumbs>
     </div>
@@ -77,7 +77,7 @@
       </template>
     </v-row>
 
-    <div class="my-10">
+    <div class="my-10" v-if="articles.length > 0">
       <h2 class="text-center display-2">Dernières publiées</h2>
       <v-divider></v-divider>
       <div class="mt-8"></div>
@@ -115,10 +115,26 @@
       <v-pagination class="my-5" v-model="page" :length="taille" circle total-visible="10"></v-pagination>
 
     </div>
+
+    <div v-else>
+       <h2 v-if="dialog == false" class="text-center display-2">Il n'existe pas d'article pour cette ca</h2>
+    </div>
+
+    <v-dialog v-model="dialog" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Veuillez patienter...
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
   </div>
-  <div v-else class="my-16">
-    <h3 class="text-center">Il y ' a aucun article pour cette categorie</h3>
-  </div>
+  
 </template>
 
 <script>
@@ -126,6 +142,7 @@ export default {
   data() {
     return {
       articles: [],
+      dialog: false,
       taille: null,
       page: 1,
       categoryName: null,
@@ -157,15 +174,18 @@ export default {
 
   methods: {
     getArticles: async function () {
+      this.dialog = true;
       try {
         let response = await axios.get(this.$route.path + '?page=' + this.page);
         if (response.status == 200) {
           this.articles = response.data.data;
           this.page = response.data.current_page;
           this.taille = response.data.last_page;
+          this.dialog = false;
           console.log(response.data);
         }
       } catch (error) {
+        this.dialog = false;
         console.log(error);
       }
     },

@@ -40,6 +40,19 @@
       </v-col>
       <v-col cols="12" md="2"></v-col>
     </v-row>
+
+    <v-dialog v-model="dialog" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Veuillez patienter...
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -49,6 +62,7 @@ export default {
     return {
       article: {},
       errors: {},
+      dialog: false,
       socialMedia: [
         {
           icon: "mdi-facebook",
@@ -74,15 +88,18 @@ export default {
   },
   methods: {
     getArticle: async function () {
+      this.dialog = true;
       try {
         let response = await axios.get(
           "/article/" + this.$route.params.slug + "/show"
         );
         if (response.status == 200) {
           this.article = response.data;
+          this.dialog = false;
         }
       } catch (error) {
         console.log(error);
+        this.dialog = false;
       }
     },
   },

@@ -1,6 +1,5 @@
 <template>
   <v-app>
-
     <Pub :zone="zone1" />
 
     <v-row>
@@ -90,7 +89,6 @@
       </v-col>
     </v-row>
 
-    
     <h1 class="mt-2">
       <router-link
         to="/categorie/sports"
@@ -101,7 +99,6 @@
     <v-divider></v-divider>
 
     <Pub :zone="zone4" />
-
 
     <div class="my-4">
       <v-row>
@@ -124,7 +121,6 @@
 
     <Pub :zone="zone5" />
 
-
     <div class="my-4">
       <v-row>
         <template v-for="(culture, index) in cultures.slice(0, 6)">
@@ -134,20 +130,34 @@
         </template>
       </v-row>
     </div>
+
+    <v-dialog v-model="dialog" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Veuillez patienter...
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
 <script>
 import ArticleCard from "./ArticleCard.vue";
-import Pub from './Pub.vue';
+import Pub from "./Pub.vue";
 export default {
   components: {
     ArticleCard,
-    Pub
+    Pub,
   },
   data() {
     return {
       articles: [],
+      dialog: true
     };
   },
 
@@ -161,6 +171,7 @@ export default {
       try {
         let response = await axios.get("/article");
         if (response.status == 200) {
+          this.dialog = false;
           this.articles = response.data;
         }
       } catch (error) {
