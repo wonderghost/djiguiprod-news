@@ -137,31 +137,31 @@ export default {
       search: "",
       items: [
         { icon: "mdi-view-dashboard", text: "Dashboard", route: "/dashboard" },
-        { icon: "mdi-file", text: "Articles", route: "/articles" },
+        { icon: "mdi-file", text: "Articles", route: "/admin/articles" },
         {
           icon: "mdi-briefcase-variant",
           text: "Catégories",
-          route: "category",
+          route: "/admin/category",
         },
         {
           icon: "mdi-subtitles",
           text: "Sous Catégories",
-          route: "/sous-categorie",
+          route: "/admin/sous-categorie",
         },
         {
           icon: "mdi-account-supervisor-circle",
           text: "Redacteurs",
-          route: "/users",
+          route: "/admin/users",
         },
         {
           icon: "mdi-account-supervisor",
           text: "Clients",
-          route: "/clients",
+          route: "/admin/clients",
         },
         {
           icon: "mdi-publish",
           text: "Banniere pub",
-          route: "/banner",
+          route: "/admin/banner",
         },
       ],
     };

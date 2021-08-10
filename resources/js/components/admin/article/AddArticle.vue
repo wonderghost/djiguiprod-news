@@ -99,7 +99,7 @@ export default {
         });
         if (response.status == 200) {
           console.log(response);
-          this.$router.push('/articles')
+          this.$router.push('/admin/articles')
         }
       } catch (error) {
         console.log(error);

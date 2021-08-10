@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     addArticle() {
-      return this.$router.push('/add-article');
+      return this.$router.push('/admin/add-article');
     },
   },
   mounted() {
