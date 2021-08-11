@@ -11,7 +11,7 @@
             :src="'/uploads/' + article.image"
           >
           </v-img>
-          <v-card-text class="text--primary">
+          <v-card-text>
             <div class="d-flex justify-space-between">
               <p class="text-left">
                 <v-icon>mdi-account</v-icon> Autheur: {{ article.userName }}

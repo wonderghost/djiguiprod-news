@@ -1,12 +1,7 @@
 <template>
   <div>
-    <div>
-      <v-breadcrumbs :items="items" class="pl-0 my-n4"></v-breadcrumbs>
-    </div>
 
-    <h2 class="my-4">{{ categoryName }}</h2>
-
-    <div class="mb-4">
+    <div class="my-5">
       <v-row>
         <v-col cols="12" md="8">
           <template v-for="(article, index) in articles.slice(0, 1)">
@@ -145,7 +140,6 @@ export default {
       dialog: false,
       taille: null,
       page: 1,
-      categoryName: null,
       items: [
         {
           text: "Accueil",

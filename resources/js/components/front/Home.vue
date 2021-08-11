@@ -23,7 +23,7 @@
                   height="450px"
                   :src="'/uploads/' + article.image"
                 >
-                  <v-card-title class="text--primary">{{
+                  <v-card-title>{{
                     article.name
                   }}</v-card-title>
                 </v-img>
