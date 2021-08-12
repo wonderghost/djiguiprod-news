@@ -19,7 +19,7 @@ class CreateBanniersTable extends Migration
             $table->string('image');
             $table->timestamps();
 
-            $table->integer('id_client');
+            $table->unsignedInteger('id_client');
             $table->foreign('id_client')->references('id')->on('client_banners');
         });
     }

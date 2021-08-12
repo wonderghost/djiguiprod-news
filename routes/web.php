@@ -31,6 +31,8 @@ Route::get('/user', function() {
     return request()->user();
 })->middleware('auth');
 
+Route::post('/logout', [Auth\LoginController::class, 'logout']);
+
 Route::prefix('/category')->group(function() {
     Route::get('', [CategoryController::class, 'index']);
     Route::post('/store', [CategoryController::class, 'store'])->middleware('auth');

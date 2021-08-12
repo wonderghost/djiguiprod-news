@@ -32,37 +32,7 @@
           </v-carousel-item>
         </v-carousel>
 
-        <div class="mt-1">
-          <v-row>
-            <template v-for="(article, index) in articles.slice(1, 3)">
-              <v-col cols="12" md="6" :key="index">
-                <v-hover v-slot="{ hover }" open-delay="200">
-                  <v-card
-                    class="mx-auto"
-                    max-width="400"
-                    :elevation="hover ? 16 : 2"
-                    :class="{ 'on-hover': hover }"
-                    @click="openDetail(article)"
-                  >
-                    <v-img
-                      class="white--text align-end"
-                      height="200px"
-                      :src="'/uploads/' + article.image"
-                    >
-                      <v-card-title>{{ article.name }}</v-card-title>
-                    </v-img>
-
-                    <v-card-text class="text--primary">
-                      <div
-                        v-html="article.description.substr(0, 100) + '...'"
-                      ></div>
-                    </v-card-text>
-                  </v-card>
-                </v-hover>
-              </v-col>
-            </template>
-          </v-row>
-        </div>
+        
       </v-col>
 
       <v-col cols="12" md="3" class="mt-3">
@@ -88,6 +58,38 @@
         </template>
       </v-col>
     </v-row>
+    
+    <div class="mt-1">
+      <v-row>
+        <template v-for="(article, index) in articles.slice(1, 4)">
+          <v-col cols="12" md="4" :key="index">
+            <v-hover v-slot="{ hover }" open-delay="200">
+              <v-card
+                class="mx-auto"
+                max-width="400"
+                :elevation="hover ? 16 : 2"
+                :class="{ 'on-hover': hover }"
+                @click="openDetail(article)"
+              >
+                <v-img
+                  class="white--text align-end"
+                  height="200px"
+                  :src="'/uploads/' + article.image"
+                >
+                  <v-card-title>{{ article.name }}</v-card-title>
+                </v-img>
+
+                <v-card-text class="text--primary">
+                  <div
+                    v-html="article.description.substr(0, 100) + '...'"
+                  ></div>
+                </v-card-text>
+              </v-card>
+            </v-hover>
+          </v-col>
+        </template>
+      </v-row>
+    </div>
 
     <h1 class="mt-2">
       <router-link

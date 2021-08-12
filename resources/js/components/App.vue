@@ -9,6 +9,7 @@
       dark
       small
       color="primary"
+      class="d-none d-lg-block"
       @click="
         () => {
           $store.commit('setDrawer', !drawer);
@@ -22,7 +23,7 @@
       <v-container>
         <router-view></router-view>
       </v-container>
-        <v-btn v-if="showScroll" @click="$vuetify.goTo(0)" color="primary" dark fixed z-index="1" small bottom right style="bottom: 10%"
+        <v-btn v-if="showScroll" @click="$vuetify.goTo(0)" class="d-none d-lg-block" color="primary" dark fixed z-index="1" small bottom right style="bottom: 10%"
         fab>
           <v-icon>mdi-arrow-up-bold-circle</v-icon>
         </v-btn>

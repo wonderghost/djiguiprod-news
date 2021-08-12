@@ -4,7 +4,7 @@
       <v-card flat tile class="white--text text-center" color="grey darken-3">
         <v-row>
           <v-col cols="12" md="4">
-            <v-card-text class="text-left pt-4 ml-10">
+            <v-card-text class="text-left ">
               Depuis Mars 2018, Djigui Production accompagne des acteurs
               culturels dans les domaines Culturel, Artistique et
               l'événementiel. Si votre objectif est de vous produire sur scène
@@ -34,7 +34,7 @@
           </v-col>
 
           <v-col cols="12" md="4">
-            <v-card-text class="text-left">
+            <v-card-text class="text-center">
               <v-row dense>
                 <v-col cols="12" md="12">
                   <v-icon left>mdi-google-maps</v-icon>
@@ -69,7 +69,7 @@
         <v-divider></v-divider>
 
         <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>Djiguiprod NEWS</strong>
+          {{ new Date().getFullYear() }} — <strong>DJIGUIPROD NEWS</strong> &copy; POWERED BY <span>SMARTECH</span>
         </v-card-text>
       </v-card>
     </v-footer>
