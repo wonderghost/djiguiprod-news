@@ -55,6 +55,7 @@ Route::prefix('article')->group(function() {
     Route::put('/{slug}/update', [ArticleController::class, 'update'])->middleware('auth');
     Route::delete('/{slug}/delete', [ArticleController::class, 'destroy'])->middleware('auth');
 });
+Route::get('/search', [ArticleController::class, 'search']);
 Route::get('/categorie/{slug}', [ArticleController::class, 'articleByCategory']);
 
 Route::prefix('client')->group(function() {

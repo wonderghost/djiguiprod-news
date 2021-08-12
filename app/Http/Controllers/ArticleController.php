@@ -207,4 +207,23 @@ class ArticleController extends Controller
             return response()->json($e->getMessage(), 422);
         }
     }
+
+    public function search() 
+    {
+        try
+        {
+            request()->validate(['text' => 'required']);
+
+            $data = Article::orderBy('created_at', 'DESC')
+                ->where('name', 'LIKE', "%". request()->text . "%")
+                ->limit(50)->get();
+
+            return response()->json($data, 200);
+        }
+        catch(ErrorException $e) 
+        {
+            header('Erreur', 422);
+            return response()->json($e->getMessage(), 422);
+        }
+    }
 }

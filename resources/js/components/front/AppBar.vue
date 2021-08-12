@@ -124,17 +124,17 @@
 
     <v-container fluid v-if="search != ''">
       <v-layout justify-center row wrap>
-        <v-flex xs12 class="center mt-10">
+        <v-flex xs12 class="center">
           <v-layout justify-center row wrap>
             <v-flex xs6>
-              <v-list three-line>
-                <template v-for="(item, index) in filterArticle">
+              <v-list three-line >
+                <template v-for="(item, index) in searchResponse">
                   <v-list-item :key="index" @click="openDetail(item)">
                     <v-list-item-avatar>
                       <v-img :src="'/uploads/' + item.image"></v-img>
                     </v-list-item-avatar>
 
-                    <v-list-item-content>
+                    <v-list-item-content color="white">
                       <v-list-item-title v-html="item.name"></v-list-item-title>
                       <v-list-item-subtitle
                         v-html="item.description.substr(0, 100) + '...'"
@@ -158,6 +158,7 @@ export default {
       group: null,
       isSearching: false,
       selectedItem: 0,
+      searchResponse: [],
       search: "",
       items: [
         { icon: "mdi-view-dashboard", text: "Dashboard", route: "/dashboard" },
@@ -192,9 +193,7 @@ export default {
   },
 
   watch: {
-    group() {
-      this.drawer = false;
-    },
+    search: 'onSearch'
   },
 
   mounted() {
@@ -214,6 +213,20 @@ export default {
     },
     goHome() {
       this.$router.push("/");
+    },
+
+    onSearch: async function() {
+      try
+      {
+        let response = await axios.get('/search?text=' + this.search);
+        if(response.status == 200) {
+
+          this.searchResponse = response.data;
+        }
+      }
+      catch(error) {
+        console.log(error)
+      }
     },
 
     logout: async function () {
@@ -241,11 +254,6 @@ export default {
     },
     articles() {
       return this.$store.state.articles;
-    },
-    filterArticle() {
-      return this.articles.filter((article) => {
-        return article.name.match(this.search);
-      });
     },
   },
 };
