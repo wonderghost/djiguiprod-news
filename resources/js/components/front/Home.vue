@@ -23,9 +23,11 @@
                   height="450px"
                   :src="'/uploads/' + article.image"
                 >
-                  <v-card-title>{{
-                    article.name
-                  }}</v-card-title>
+                  <v-card-title>
+                    <v-card flat id="cardColor">
+                     <v-car-title class="white--text">{{ article.name }}</v-car-title>
+                    </v-card>
+                  </v-card-title>
                 </v-img>
               </v-card>
             </v-hover>
@@ -76,7 +78,11 @@
                   height="200px"
                   :src="'/uploads/' + article.image"
                 >
-                  <v-card-title>{{ article.name }}</v-card-title>
+                  <v-card-title>
+                    <v-card flat id="cardColor">
+                     <v-car-title class="white--text">{{ article.name }}</v-car-title>
+                    </v-card>
+                  </v-card-title>
                 </v-img>
 
                 <v-card-text class="text--primary">
@@ -234,3 +240,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  #cardColor {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-color: white !important;
+  }
+</style>

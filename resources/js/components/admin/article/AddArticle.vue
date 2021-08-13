@@ -105,10 +105,11 @@ export default {
     },
 
     saveArticle: async function () {
+      this.isLoading = true
       try {
         this.form._token = this.token;
         this.form.author = this.user.id;
-
+        
         let formData = new FormData();
         formData.append("image", this.form.image);
         formData.append("name", this.form.name);
@@ -124,10 +125,12 @@ export default {
         });
         if (response.status == 200) {
           console.log(response);
+          this.isLoading = false
           this.$router.push('/admin/articles')
         }
       } catch (error) {
         console.log(error);
+        this.isLoading = false;
         let theErrors = [];
         if (error.response.data.errors) {
           let errorTab = error.response.data.errors;

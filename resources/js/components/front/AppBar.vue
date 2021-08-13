@@ -206,7 +206,7 @@ export default {
     openDetail(a) {
       this.search = "";
       this.isSearching = false;
-      this.$router.push("/" + a.category.slug + "/" + a.slug);
+      this.$router.push('/' + a.slug);
     },
     openSearch() {
       return (this.isSearching = !this.isSearching);
