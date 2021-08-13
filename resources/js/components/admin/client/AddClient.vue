@@ -67,6 +67,29 @@
         </v-btn>
       </template>
     </v-snackbar>
+
+    <v-dialog width="400" v-model="error" persistent>
+      <v-card style="padding: 4%">
+        <v-card-title>Erreur(s)</v-card-title>
+        <template v-for="(err, index) in errors">
+          <v-alert type="error" dense :key="index">{{ err }}</v-alert>
+        </template>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue"
+            text
+            block
+            @click="
+              () => {
+                error = false;
+              }
+            "
+            >Fermer</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -82,6 +105,7 @@ export default {
         _token: ""
       },
       errors: {},
+      error: false,
       isLoading: false,
       snackbar: false,
       message: "",
@@ -106,7 +130,18 @@ export default {
       } catch (error) {
         console.log(error);
         this.isLoading = false;
-        this.errors = error.response.errors;
+        let theErrors = [];
+        if (error.response.data.errors) {
+          let errorTab = error.response.data.errors;
+          for (var prop in errorTab) {
+            theErrors.push(errorTab[prop][0]);
+          }
+        } else {
+          theErrors.push(error.response.data);
+        }
+
+        this.errors = theErrors;
+        this.error = true;
       }
     },
   },
