@@ -25,7 +25,7 @@
                 >
                   <v-card-title>
                     <v-card flat id="cardColor">
-                     <v-car-title class="white--text">{{ article.name }}</v-car-title>
+                     <v-card-title class="white--text">{{ article.name }}</v-card-title>
                     </v-card>
                   </v-card-title>
                 </v-img>
@@ -80,7 +80,7 @@
                 >
                   <v-card-title>
                     <v-card flat id="cardColor">
-                     <v-car-title class="white--text">{{ article.name }}</v-car-title>
+                     <v-card-title class="white--text">{{ article.name }}</v-card-title>
                     </v-card>
                   </v-card-title>
                 </v-img>
