@@ -1,5 +1,10 @@
 <template>
   <div>
+    <meta property="og:url"           :content="encodeURI(loc)"/>
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Djiguiprod News" />
+    <meta property="og:description"   content="Magazine culturelle" />
+    <meta property="og:image"         :content="'/uploads/' + article.image" />
     <v-row>
       <v-col cols="12" md="2"></v-col>
       <v-col cols="12" md="8">
@@ -23,7 +28,7 @@
             </div>
           </v-card-text>
           <v-card-text class="text-center">
-            <v-btn
+            <!-- <v-btn
               small
               fab
               v-for="(icon, index) in socialMedia"
@@ -32,7 +37,11 @@
               :href="icon.href + encodeURI(loc)"
             >
             <v-icon :color="icon.color" size="250%">{{ icon.icon }}</v-icon>
-            </v-btn>
+            </v-btn> -->
+            <div class="fb-share-button" 
+            :data-href="encodeURI(loc)" 
+            data-layout="button_count">
+            </div>
           </v-card-text>
         </v-card>
 
@@ -53,6 +62,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    <div id="fb-root"></div>
   </div>
 </template>
 
@@ -105,6 +115,13 @@ export default {
   },
   mounted() {
     this.getArticle();
+    (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
   }
 };
 </script>
