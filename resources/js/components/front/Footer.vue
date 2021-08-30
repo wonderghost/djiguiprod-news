@@ -57,10 +57,11 @@
                 fab
                 color="white"
                 small
+                @click="openLink(icon.link)"
               >
-                <v-icon :color="icon.color">
-                  {{ icon.icon }}
-                </v-icon>
+                  <v-icon :color="icon.color" >
+                    {{ icon.icon }}
+                  </v-icon>
               </v-btn>
             </v-card-text>
           </v-col>
@@ -83,16 +84,26 @@ export default {
       {
         icon: "mdi-facebook",
         color: "#3b5998",
+        link: "https://www.facebook.com/Newsdjiguiprodcom-101551088915221"
       },
       {
         icon: "mdi-twitter",
         color: "#00acee",
+        link: ""
       },
       {
         icon: "mdi-linkedin",
         color: "#0e76a8",
+        link: ""
       },
     ],
   }),
+
+  methods: {
+    openLink(link) {
+      window.open(link, '_blank');
+      console.log(link)
+    }
+  }
 };
 </script>
