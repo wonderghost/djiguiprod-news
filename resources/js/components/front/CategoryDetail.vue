@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <Pub :zone="zone1" />
     <div class="my-5">
       <v-row>
         <v-col cols="12" md="8">
@@ -133,7 +133,12 @@
 </template>
 
 <script>
+
+import Pub from './Pub.vue';
 export default {
+  components: {
+    Pub
+  },
   data() {
     return {
       articles: [],
@@ -187,6 +192,16 @@ export default {
       this.$router.push("/" + a.slug);
     },
   },
-  computed: {},
+  computed: {
+    banners() {
+      return this.$store.state.banners;
+    },
+
+    zone1() {
+      return this.banners.filter((a) => {
+        return a.name = "1";
+      });
+    }
+  },
 };
 </script>

@@ -38,7 +38,7 @@
       </v-col>
 
       <v-col cols="12" md="3" class="mt-3">
-        <template v-for="(banner, index) in zone2.slice(1, 2)" flat>
+        <template v-for="(banner, index) in zone2.slice(0, 1)" flat>
           <v-card class="mx-auto mb-4" max-width="600" :key="index">
             <v-img
               class="white--text align-end"
