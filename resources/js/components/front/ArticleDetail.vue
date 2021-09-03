@@ -50,6 +50,44 @@
       <v-col cols="12" md="2"></v-col>
     </v-row>
 
+
+    <div class="mt-10" v-if="articles.length > 0">
+    <v-divider></v-divider>
+      <h3 class="text-center">Articles qui pourraient vous interesser.</h3>
+      <v-divider></v-divider>
+      <div class="mt-8"></div>
+      <v-row>
+        <template v-for="(article, index) in articles.slice(0, 5)">
+          <v-col cols="12" md="6" :key="index" class="my-2">
+            <v-hover v-slot="{ hover }" open-delay="200">
+              <v-card
+                flat
+                :elevation="hover ? 16 : 2"
+                :class="{ 'on-hover': hover }"
+                @click="openDetail(article)"
+              >
+                <v-row>
+                  <v-col cols="12" md="6">
+                    <v-img
+                      class="white--text align-end"
+                      height="200px"
+                      :src="'/uploads/' + article.image"
+                    >
+                    </v-img>
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <h3>{{ article.name.substr(0, 70) }}</h3>
+                    <br />
+                    <p v-html="article.description.substr(0, 80) + '...'"></p>
+                  </v-col>
+                </v-row>
+              </v-card>
+            </v-hover>
+          </v-col>
+        </template>
+      </v-row>
+    </div>
+
     <v-dialog v-model="dialog" hide-overlay persistent width="300">
       <v-card color="primary" dark>
         <v-card-text>
@@ -62,7 +100,6 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <div id="fb-root"></div>
   </div>
 </template>
 
@@ -71,6 +108,7 @@ export default {
   data() {
     return {
       article: {},
+      articles: [],
       errors: {},
       dialog: false,
       socialMedia: [
@@ -112,9 +150,29 @@ export default {
         this.dialog = false;
       }
     },
+
+    getArticleBySubCategory: async function() {
+      try {
+        let response = await axios.get("/articles/" + this.$route.params.subcategory);
+
+        if(response.status == 200) {
+          console.log(response);
+          this.articles = response.data;
+        }
+      } catch (error) {
+        console.log(error);
+        this.dialog = false;
+      }
+    },
+
+    openDetail(a) {
+      return this.$router.push("/" + a.id_sub_category + '/' + a.slug);
+    },
   },
   mounted() {
     this.getArticle();
+    this.getArticleBySubCategory();
+
     (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;

@@ -3,7 +3,7 @@
     <Pub :zone="zone1" />
     <div class="my-5">
       <v-row>
-        <v-col cols="12" md="8">
+        <v-col cols="12" md="9" class="mt-3">
           <template v-for="(article, index) in articles.slice(0, 1)">
             <v-hover v-slot="{ hover }" open-delay="200" :key="index">
               <v-card
@@ -28,20 +28,28 @@
           </template>
         </v-col>
 
-        <v-col cols="12" md="4">
-          <v-hover v-slot="{ hover }" open-delay="200">
-            <v-card
-              class="mx-auto"
-              max-width="400"
-              max-height="900"
-              :elevation="hover ? 16 : 2"
-              :class="{ 'on-hover': hover }"
-              color="grey"
+        <v-col cols="12" md="3" class="mt-3">
+        <template v-for="(banner, index) in zone2.slice(0, 1)" flat>
+          <v-card class="mx-auto mb-4" max-width="600" :key="index">
+            <v-img
+              class="white--text align-end"
+              height="215"
+              :src="'/uploads/' + banner.image"
             >
-              Publicités
-            </v-card>
-          </v-hover>
-        </v-col>
+            </v-img>
+          </v-card>
+        </template>
+        <template v-for="(banner, index) in zone3.slice(0, 1)" flat>
+          <v-card class="mx-auto mb-4" max-width="600" :key="index">
+            <v-img
+              class="white--text align-end"
+              height="215"
+              :src="'/uploads/' + banner.image"
+            >
+            </v-img>
+          </v-card>
+        </template>
+      </v-col>
       </v-row>
     </div>
 
@@ -73,7 +81,8 @@
     </v-row>
 
     <div class="my-10" v-if="articles.length > 0">
-      <h2 class="text-center display-2">Dernières publiées</h2>
+      <v-divider></v-divider>
+      <h2 class="text-center display-1">Dernières publiées</h2>
       <v-divider></v-divider>
       <div class="mt-8"></div>
       <v-row>
@@ -177,6 +186,7 @@ export default {
       try {
         let response = await axios.get(this.$route.path + '?page=' + this.page);
         if (response.status == 200) {
+          console.log(this.$route.path + '?page=' + this.page);
           this.articles = response.data.data;
           this.page = response.data.current_page;
           this.taille = response.data.last_page;
@@ -189,7 +199,7 @@ export default {
       }
     },
     openDetail(a) {
-      this.$router.push("/" + a.slug);
+      this.$router.push("/" + a.id_sub_category + "/" + a.slug);
     },
   },
   computed: {
@@ -200,6 +210,18 @@ export default {
     zone1() {
       return this.banners.filter((a) => {
         return a.name = "1";
+      });
+    },
+
+    zone2() {
+      return this.banners.filter(a => {
+        return a.name = "2";
+      });
+    },
+
+    zone3() {
+      return this.banners.filter(a => {
+        return a.name = "3";
       });
     }
   },

@@ -42,8 +42,9 @@
           <v-card class="mx-auto mb-4" max-width="600" :key="index">
             <v-img
               class="white--text align-end"
-              height="215"
               :src="'/uploads/' + banner.image"
+              contain
+
             >
             </v-img>
           </v-card>
@@ -51,9 +52,10 @@
         <template v-for="(banner, index) in zone3.slice(0, 1)" flat>
           <v-card class="mx-auto mb-4" max-width="600" :key="index">
             <v-img
+              contain
               class="white--text align-end"
-              height="215"
               :src="'/uploads/' + banner.image"
+              max-height="215"
             >
             </v-img>
           </v-card>
@@ -188,7 +190,7 @@ export default {
     },
 
     openDetail(a) {
-      this.$router.push("/" + a.slug);
+      this.$router.push("/" + a.id_sub_category + "/" + a.slug);
     },
   },
   computed: {

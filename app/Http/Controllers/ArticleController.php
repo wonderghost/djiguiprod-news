@@ -40,10 +40,30 @@ class ArticleController extends Controller
             ->join('sub_category', 'article.id_sub_category', "=", "sub_category.slug")
             ->join('category', 'sub_category.id_category', "=", "category.slug")
             ->where('category.slug', $slug)
-            ->select('article.slug', 'article.name', 'article.description', 'article.image', 'article.created_at')
+            ->select('article.slug', 'article.name', 'article.description', 'article.image', 
+            'article.created_at', 'article.id_sub_category')
             ->paginate();
 
             return response()->json($articles, 200);
+        }
+        catch(ErrorException $e) {
+            header('Erreur', true, 422);
+            return response()->json($e->getMessage(), 422);
+        }
+    }
+
+    public function articleBySubCategory(string $idSubCategory)
+    {
+        try 
+        {
+            $articles = Article::orderBy('article.created_at', 'DESC')
+                ->join('sub_category', 'article.id_sub_category', "=", "sub_category.slug")
+                ->where('id_sub_category', $idSubCategory)
+                ->select('article.slug', 'article.name', 'article.description', 'article.image', 
+                'article.created_at', 'article.id_sub_category')
+                ->get();
+            
+                return response()->json($articles);
         }
         catch(ErrorException $e) {
             header('Erreur', true, 422);
