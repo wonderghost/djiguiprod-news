@@ -134,6 +134,14 @@ export default {
       loc : location.href
     };
   },
+
+  watch: {
+    '$route.path': function() {
+      this.getArticle(),
+      this.getArticleBySubCategory(),
+      this.$vuetify.goTo(0)
+    },
+  },
   methods: {
     getArticle: async function () {
       this.dialog = true;
@@ -166,6 +174,7 @@ export default {
     },
 
     openDetail(a) {
+      console.log("/" + a.id_sub_category + '/' + a.slug);
       return this.$router.push("/" + a.id_sub_category + '/' + a.slug);
     },
   },
