@@ -16,6 +16,7 @@ import UpdateArticle from './components/admin/article/UpdateArticle.vue';
 Vue.use(VueRouter)
 
 const router = new VueRouter({
+    mode: 'history',
     routes : [
         {
             path: '/',

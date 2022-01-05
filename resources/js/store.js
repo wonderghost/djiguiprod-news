@@ -42,7 +42,7 @@ const store = new Vuex.Store({
     actions: {
         actifUser(context) {
             let response = async function() {
-                return await axios.get('/user');
+                return await axios.get('/request/user');
             }();
             response.then(r => {
                 context.commit('setUser', r.data)
@@ -50,7 +50,7 @@ const store = new Vuex.Store({
         },
         getCategories(context) {
             let response = async function() {
-                return await axios.get('/category');
+                return await axios.get('/request/category');
             }();
             response.then(result => {
                 context.commit('setCategories', result.data)
@@ -58,7 +58,7 @@ const store = new Vuex.Store({
         },
         getClients(context) {
             let response = async function() {
-                return await axios.get('/client');
+                return await axios.get('/request/client');
             }();
             response.then(result => {
                 context.commit('setClients', result.data);
@@ -66,7 +66,7 @@ const store = new Vuex.Store({
         },
         getBanners(context) {
             let response = async function() {
-                return await axios.get('/banner');
+                return await axios.get('/request/banner');
             }();
             response.then(results => {
                 context.commit('setBanners', results.data);

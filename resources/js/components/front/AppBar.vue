@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    <v-navigation-drawer height="100%" v-model="drawer" color="#F4F5F9" app>
+  <v-app class="">
+    <v-navigation-drawer height="100%" disable-resize-watcher v-model="drawer" color="#F4F5F9" app>
       <v-list nav dense class="d-block d-lg-none d-md-none">
         <v-list-item to="/">
           <v-list-item-icon>
@@ -74,7 +74,6 @@
       <v-toolbar-title>
         <router-link to="/">
           <v-img
-            style="margin-left: 80px"
             max-height="80"
             max-width="150"
             src="images/logo-djigui.png"
@@ -83,7 +82,7 @@
         </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <div style="margin-right: 80px" class="d-none d-lg-block">
+      <div class="d-none d-lg-block">
         <v-icon color="white" size="20" @click="goHome">mdi-home</v-icon>
         <template v-for="(category, index) in categories">
           <router-link
@@ -149,7 +148,7 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </div>
+  </v-app>
 </template>
 <script>
 export default {
@@ -218,7 +217,7 @@ export default {
     onSearch: async function() {
       try
       {
-        let response = await axios.get('/search?text=' + this.search);
+        let response = await axios.get('/request/search?text=' + this.search);
         if(response.status == 200) {
 
           this.searchResponse = response.data;
@@ -231,7 +230,7 @@ export default {
 
     logout: async function () {
       try {
-        let response = await axios.post("/logout");
+        let response = await axios.post("request/logout");
 
         if (response.status == 200) {
           location.reload();
