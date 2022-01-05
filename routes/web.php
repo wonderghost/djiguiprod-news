@@ -41,7 +41,7 @@ Route::prefix('/request/category')->group(function() {
     Route::delete('/{slug}/delete', [CategoryController::class, 'destroy'])->middleware('auth');
 });
 
-Route::prefix('reqquest/sub-category')->group(function() {
+Route::prefix('/request/sub-category')->group(function() {
     Route::get('', [SubCategoryController::class, 'index']);
     Route::post('/store', [SubCategoryController::class, 'store'])->middleware('auth');
     Route::put('/{slug}/update', [SubCategoryController::class, 'update'])->middleware('auth');

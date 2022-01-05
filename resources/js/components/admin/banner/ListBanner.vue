@@ -210,7 +210,7 @@ export default {
         formData.append("_token", this.form._token)
 
         let response = await axios.put(
-          "/banner/" + this.singleBanner.id + "/update",
+          "/request/banner/" + this.singleBanner.id + "/update",
           formData
         );
         if (response.status == 200) {
@@ -244,7 +244,7 @@ export default {
       this.isLoading = true;
       try {
         let respose = await axios.delete(
-          "/banner/" + this.singleBanner.id + "/delete"
+          "/request/banner/" + this.singleBanner.id + "/delete"
         );
         if (respose.status == 200) {
           console.log(respose);

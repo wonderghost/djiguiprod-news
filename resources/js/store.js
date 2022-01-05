@@ -74,7 +74,7 @@ const store = new Vuex.Store({
         },
         getArticles(context) {
             let response = async function() {
-                return await axios.get('article');
+                return await axios.get('/request/article');
             }();
             response.then(results => {
                 context.commit('setArticles', results.data);

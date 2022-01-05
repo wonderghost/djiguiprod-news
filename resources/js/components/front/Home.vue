@@ -29,7 +29,7 @@
                   </v-img>
                </v-card>
          </template>
-         <template v-for="(banner, index) in zone3.slice(0, 1)" flat>
+         <template v-for="(banner, index) in zone3.slice(1, 2)" flat>
                <v-card class="mx-auto mb-4" max-width="600" :key="index">
                   <v-img contain class="white--text align-end" :src="'/uploads/' + banner.image" max-height="215">
                   </v-img>
@@ -53,7 +53,7 @@
                            </v-img>
 
                            <v-card-text class="text--primary">
-                              <div v-html="article.description.substr(0, 100) + '...'"></div>
+                              <div style="all: revert;" v-html="article.description.substr(0, 100) + '...'">{{ article.description.substr(0, 100) + '...' }}</div>
                            </v-card-text>
                      </v-card>
                   </v-hover>

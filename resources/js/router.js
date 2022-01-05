@@ -34,36 +34,36 @@ const router = new VueRouter({
             component: ArticleDetail
         },
         {
-            path: '/admin/dashboard',
+            path: '/admin/dashboard/list',
             name: 'dashboard',
             component: Dashboard
         },
         {
-            path: '/admin/category',
+            path: '/admin/category/list',
             component: Category
         },
         {
-            path: '/admin/sous-categorie',
+            path: '/admin/sous-categorie/list',
             component: SubCategory,
         },
         {
-            path: '/admin/users',
+            path: '/admin/users/list',
             component: User,
         },
         {
-            path: '/admin/articles',
+            path: '/admin/articles/list',
             component: Article,
         },
         {
-            path: '/admin/add-article',
+            path: '/admin/add-article/add',
             component: AddArticle,
         },
         {
-            path: '/admin/clients',
+            path: '/admin/clients/list',
             component: Client,
         },
         {
-            path: '/admin/banner',
+            path: '/admin/banner/list',
             component: Banner,
         },
         {

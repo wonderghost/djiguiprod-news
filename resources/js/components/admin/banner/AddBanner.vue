@@ -121,7 +121,7 @@ export default {
         formData.append("image", this.form.image)
         formData.append("_token", this.form._token)
 
-        let response = await axios.post("/banner/store", formData);
+        let response = await axios.post("/request/banner/store", formData);
         if (response.status == 200) {
           console.log(response);
           this.message = response.data.message;

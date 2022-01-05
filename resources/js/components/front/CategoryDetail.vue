@@ -24,7 +24,7 @@
                      </v-img>
                   </v-card>
                </template>
-               <template v-for="(banner, index) in zone3.slice(0, 1)" flat>
+               <template v-for="(banner, index) in zone3.slice(1, 2)" flat>
                   <v-card class="mx-auto mb-4" max-width="600" :key="index">
                      <v-img class="white--text align-end" height="215" :src="'/uploads/' + banner.image">
                      </v-img>

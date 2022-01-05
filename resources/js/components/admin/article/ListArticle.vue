@@ -104,14 +104,14 @@ export default {
   },
   methods: {
     updateArticle(article) {
-      return this.$router.push("articles/update/" + article.slug);
+      return this.$router.push("/articles/update/" + article.slug);
     },
 
     editCategory: async function () {
       this.isLoading = true;
       try {
         let response = await axios.put(
-          "/category/" + this.singleEditCategory.slug + "/update",
+          "/request/category/" + this.singleEditCategory.slug + "/update",
           this.singleEditCategory
         );
         if (response.status == 200) {
@@ -134,7 +134,7 @@ export default {
       this.isLoading = true;
       try {
         let respose = await axios.delete(
-          "/article/" + this.singleArticle.slug + "/delete"
+          "/request/article/" + this.singleArticle.slug + "/delete"
         );
         if (respose.status == 200) {
           console.log(respose);

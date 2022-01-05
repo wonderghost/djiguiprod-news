@@ -209,37 +209,37 @@ export default {
                 {
                     icon: "mdi-view-dashboard",
                     text: "Dashboard",
-                    route: "/dashboard"
+                    route: "/admin/dashboard/list"
                 },
                 {
                     icon: "mdi-file",
                     text: "Articles",
-                    route: "/admin/articles"
+                    route: "/admin/articles/list"
                 },
                 {
                     icon: "mdi-briefcase-variant",
                     text: "Catégories",
-                    route: "/admin/category",
+                    route: "/admin/category/list",
                 },
                 {
                     icon: "mdi-subtitles",
                     text: "Sous Catégories",
-                    route: "/admin/sous-categorie",
+                    route: "/admin/sous-categorie/list",
                 },
                 {
                     icon: "mdi-account-supervisor-circle",
                     text: "Redacteurs",
-                    route: "/admin/users",
+                    route: "/admin/users/list",
                 },
                 {
                     icon: "mdi-account-supervisor",
                     text: "Clients",
-                    route: "/admin/clients",
+                    route: "/admin/clients/list",
                 },
                 {
                     icon: "mdi-publish",
                     text: "Banniere pub",
-                    route: "/admin/banner",
+                    route: "/admin/banner/list",
                 },
             ],
             icons: [{
