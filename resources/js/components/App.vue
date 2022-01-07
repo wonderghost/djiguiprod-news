@@ -114,6 +114,23 @@
             <v-icon>mdi-arrow-up-bold-circle</v-icon>
         </v-btn>
 
+        <v-row justify="center">
+            <v-dialog v-model="dialog" persistent max-width="350">
+                <v-card>
+                    <v-card-title class="text-h5">
+                        Abonnement au newsletter 
+                    </v-card-title>
+                    <v-card-text>{{ message }}</v-card-text>
+                    <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="green darken-1" text @click="dialog = false">
+                            Fermer
+                        </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-row>
+
         <v-footer padless dark>
             <v-card flat tile class="white--text text-center" color="grey darken-3">
                 <v-row>
@@ -129,18 +146,20 @@
                         </v-card-text>
                     </v-col>
                     <v-col cols="12" md="4">
-                        <v-card-text class="text-left">
+                        <v-card-text class="text-left mb-3">
                             Pour ne pas manquer à notre actualité, inscrivez-vous à la
                             Newsletter
-                            <v-row>
-                                <v-col cols="12" md="8">
-                                    <v-text-field color="withe darken-2" label="Adresse mail" required>
-                                    </v-text-field>
-                                </v-col>
-                                <v-col cols="12" md="4">
-                                    <v-btn class="my-2" color="primary">S'abonner</v-btn>
-                                </v-col>
-                            </v-row>
+                            <v-form @submit.prevent="onNewsletter()">
+                                <v-row>
+                                    <v-col cols="12" md="8">
+                                        <v-text-field v-model="newsletter.email" color="withe darken-2" label="Adresse mail" required>
+                                        </v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" md="4">
+                                        <v-btn class="my-2" color="primary" type="submit" :loading="isLoading">S'abonner</v-btn>
+                                    </v-col>
+                                </v-row>
+                            </v-form>
                         </v-card-text>
                     </v-col>
 
@@ -199,14 +218,20 @@ export default {
     data() {
         return {
             showScroll: false,
+            dialog: false,
+            message: "",
+            isLoading: false,
             drawer: false,
             group: null,
             isSearching: false,
             selectedItem: 0,
             searchResponse: [],
             search: "",
-            items: [
-                {
+            newsletter: {
+                email: "",
+                _token: null,
+            },
+            items: [{
                     icon: "mdi-view-dashboard",
                     text: "Dashboard",
                     route: "/admin/dashboard/list"
@@ -294,6 +319,9 @@ export default {
         articles() {
             return this.$store.state.articles;
         },
+        _token() {
+            return this.$store.state._token;
+        }
     },
     methods: {
         openDetail(a) {
@@ -317,6 +345,23 @@ export default {
                 }
             } catch (error) {
                 console.log(error)
+            }
+        },
+
+        onNewsletter: async function () {
+            try {
+                this.isLoading = true;
+                this.newsletter._token = this._token;
+                let response = await axios.post('/request/newsletter', this.newsletter);
+                if(response.status === 200) {
+                    this.isLoading = false;
+                    this.dialog = true;
+                    this.message = response.data.message;
+                    this.newsletter.email = ""
+                }
+            } catch (error) {
+                console.log(error);
+                this.isLoading = false;
             }
         },
 

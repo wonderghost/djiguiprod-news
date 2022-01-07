@@ -76,6 +76,8 @@ Route::prefix('/request/banner')->group(function() {
     Route::delete('/{slug}/delete', [BannerController::class, 'destroy'])->middleware('auth');
 });
 
+Route::post('/request/newsletter', [NewsletterController::class, 'store']);
+
 Route::get('/{any}', function () {
     return view('app');
 })->where('any', '.*');
