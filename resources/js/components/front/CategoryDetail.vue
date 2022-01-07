@@ -8,9 +8,14 @@
                   <v-hover v-slot="{ hover }" open-delay="200" :key="index">
                      <v-card class="mx-auto mb-4" max-width="900" max-height="900" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" @click="openDetail(article)">
                            <v-img class="white--text align-end" height="450px" :src="'/uploads/' + article.image">
-                              <v-card-title class="text--primary">{{
-                  article.name
-               }}</v-card-title>
+                              <template v-slot:placeholder>
+                                 <v-row class="fill-height ma-0" align="center" justify="center">
+                                       <v-progress-circular indeterminate color="blue darken-5"></v-progress-circular>
+                                 </v-row>
+                              </template>
+                              <v-card-title class="text--primary">
+                                 {{ article.name }}
+                              </v-card-title>
                            </v-img>
                      </v-card>
                   </v-hover>
@@ -21,12 +26,22 @@
                <template v-for="(banner, index) in zone2.slice(0, 1)" flat>
                   <v-card class="mx-auto mb-4" max-width="600" :key="index">
                      <v-img class="white--text align-end" height="215" :src="'/uploads/' + banner.image">
+                           <template v-slot:placeholder>
+                              <v-row class="fill-height ma-0" align="center" justify="center">
+                                 <v-progress-circular indeterminate color="blue darken-5"></v-progress-circular>
+                              </v-row>
+                           </template>
                      </v-img>
                   </v-card>
                </template>
                <template v-for="(banner, index) in zone3.slice(1, 2)" flat>
                   <v-card class="mx-auto mb-4" max-width="600" :key="index">
                      <v-img class="white--text align-end" height="215" :src="'/uploads/' + banner.image">
+                           <template v-slot:placeholder>
+                              <v-row class="fill-height ma-0" align="center" justify="center">
+                                 <v-progress-circular indeterminate color="blue darken-5"></v-progress-circular>
+                              </v-row>
+                           </template>
                      </v-img>
                   </v-card>
                </template>
@@ -40,6 +55,11 @@
                <v-hover v-slot="{ hover }" open-delay="200">
                   <v-card class="mx-auto" max-width="400" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" @click="openDetail(article)">
                      <v-img class="white--text align-end" height="200px" :src="'/uploads/' + article.image">
+                           <template v-slot:placeholder>
+                              <v-row class="fill-height ma-0" align="center" justify="center">
+                                 <v-progress-circular indeterminate color="blue darken-5"></v-progress-circular>
+                              </v-row>
+                           </template>
                            <v-card-title>{{ article.name }}</v-card-title>
                      </v-img>
                      <v-card-text class="text--primary">
@@ -64,6 +84,11 @@
                            <v-row>
                               <v-col cols="12" md="6">
                                  <v-img class="white--text align-end" height="200px" :src="'/uploads/' + article.image">
+                                       <template v-slot:placeholder>
+                                          <v-row class="fill-height ma-0" align="center" justify="center">
+                                             <v-progress-circular indeterminate color="blue darken-5"></v-progress-circular>
+                                          </v-row>
+                                       </template>
                                  </v-img>
                               </v-col>
                               <v-col cols="12" md="6">
@@ -94,7 +119,6 @@
          </v-card-text>
       </v-card>
    </v-dialog>
-
 </v-app>
 </template>
 
