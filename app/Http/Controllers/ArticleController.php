@@ -40,7 +40,7 @@ class ArticleController extends Controller
             ->join('sub_category', 'article.id_sub_category', "=", "sub_category.slug")
             ->join('category', 'sub_category.id_category', "=", "category.slug")
             ->where('category.slug', $slug)
-            ->select('article.slug', 'article.name', 'article.description', 'article.image', 
+            ->select('article.slug', 'article.resume', 'article.name', 'article.description', 'article.image', 
             'article.created_at', 'article.id_sub_category')
             ->paginate();
 
@@ -59,7 +59,7 @@ class ArticleController extends Controller
             $articles = Article::orderBy('article.created_at', 'DESC')
                 ->join('sub_category', 'article.id_sub_category', "=", "sub_category.slug")
                 ->where('id_sub_category', $idSubCategory)
-                ->select('article.slug', 'article.name', 'article.description', 'article.image', 
+                ->select('article.slug', 'article.name', 'article.resume', 'article.description', 'article.image', 
                 'article.created_at', 'article.id_sub_category')
                 ->get();
             
@@ -104,6 +104,7 @@ class ArticleController extends Controller
 
             $article = new Article;
             $article->name = $request->name;
+            $article->resume = $request->resume;
             $article->makeSlug();
             $article->description = $request->description;
             $article->author = request()->user()->email;
@@ -176,6 +177,7 @@ class ArticleController extends Controller
     
                 $article = new Article;
                 $article->name = $request->name;
+                $article->resume = $request->resume;
                 $article->description = $request->description;
                 $article->author = request()->user()->email;
                 $article->id_sub_category = $request->id_sub_category;

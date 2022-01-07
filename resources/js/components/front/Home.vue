@@ -72,8 +72,12 @@
                                 </v-card-title>
                             </v-img>
 
-                            <v-card-text class="text--primary">
-                                <div style="all: revert;" v-html="article.description.substr(0, 100) + '...'">{{ article.description.substr(0, 100) + '...' }}</div>
+                            <v-card-text class="text--primary" v-if="article.resume === null">
+                                <div v-text="article.name.substr(0, 100) + '...'"></div>
+                            </v-card-text>
+
+                            <v-card-text class="text--primary" v-if="article.resume != null">
+                                <div v-text="article.resume.substr(0, 100) + '...'"></div>
                             </v-card-text>
                         </v-card>
                     </v-hover>

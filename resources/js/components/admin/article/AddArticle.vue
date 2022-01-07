@@ -11,6 +11,7 @@
                <v-file-input @change="updloadFile" accept="image/*" label="Image de couverture"></v-file-input>
          </v-col>
       </v-row>
+      <v-text-field v-model="form.resume" label="Resumé" counter="150" required></v-text-field>
       <quill-editor ref="myTextEditor" v-model="form.description" label="Description" :config="editorOption">
       </quill-editor>
 
@@ -21,7 +22,7 @@
          </v-btn>
       </div>
    </v-form>
-
+   
    <v-dialog width="400" v-model="error" persistent>
       <v-card style="padding: 4%">
          <v-card-title>Erreur(s)</v-card-title>
@@ -59,6 +60,7 @@ export default {
          isLoading: false,
          form: {
                name: "",
+               resume: "",
                description: "",
                image: "",
                author: "",
@@ -89,6 +91,7 @@ export default {
                let formData = new FormData();
                formData.append("image", this.form.image);
                formData.append("name", this.form.name);
+               formData.append("resume", this.form.resume);
                formData.append("description", this.form.description);
                formData.append("author", this.form.author);
                formData.append("id_sub_category", this.form.id_sub_category);

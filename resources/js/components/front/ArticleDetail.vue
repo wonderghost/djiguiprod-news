@@ -62,7 +62,8 @@
                               <v-col cols="12" md="6">
                                  <h3>{{ article.name.substr(0, 70) }}</h3>
                                  <br />
-                                 <p v-html="article.description.substr(0, 80) + '...'"></p>
+                                 <p v-if="article.resume != null" v-text="article.resume.substr(0, 80) + '...'"></p>
+                                 <p v-if="article.resume === null" v-text="article.name.substr(0, 80) + '...'"></p>
                               </v-col>
                            </v-row>
                      </v-card>
