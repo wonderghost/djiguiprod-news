@@ -160,12 +160,12 @@ class ArticleController extends Controller
         {
             $article = Article::where('slug', '=', $slug)->first();
             if($article) {
-                $request->validate([
-                    'name' => 'required',
-                    'description' => 'required',
-                    'id_sub_category' => 'required',
-                    'image' => 'required'
-                ]);
+                // $request->validate([
+                //     'name' => 'required',
+                //     'description' => 'required',
+                //     'id_sub_category' => 'required',
+                //     'image' => 'required'
+                // ]);
 
                 if(!$request->hasFile('image')) {
                     throw new ErrorException("Aucune image trouvée.");

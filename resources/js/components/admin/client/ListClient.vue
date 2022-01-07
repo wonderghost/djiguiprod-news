@@ -206,7 +206,7 @@ export default {
       try {
         this.form._token = this.token;
         let response = await axios.put(
-          "/client/" + this.singleClient.id + "/update",
+          "/request/client/" + this.singleClient.id + "/update",
           this.singleClient
         );
         if (response.status == 200) {
@@ -239,7 +239,7 @@ export default {
       this.isLoading = true;
       try {
         let respose = await axios.delete(
-          "/client/" + this.singleClient.id + "/delete"
+          "/request/client/" + this.singleClient.id + "/delete"
         );
         if (respose.status == 200) {
           console.log(respose);

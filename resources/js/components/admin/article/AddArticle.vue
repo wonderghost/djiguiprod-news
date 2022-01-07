@@ -84,6 +84,8 @@ export default {
                this.form._token = this.token;
                this.form.author = this.user.id;
 
+               console.log(this.form)
+
                let formData = new FormData();
                formData.append("image", this.form.image);
                formData.append("name", this.form.name);
