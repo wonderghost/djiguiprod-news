@@ -105,6 +105,7 @@ export default {
                if (response.status == 200) {
                   console.log(response);
                   this.isLoading = false
+                  this.sendMail();
                   this.$router.push('/admin/articles/list')
                }
          } catch (error) {
@@ -122,6 +123,17 @@ export default {
 
                this.errors = theErrors;
                this.error = true;
+         }
+      },
+
+      sendMail: async function() {
+         try {
+            let response = await axios.get('/request/sendMail');
+            if(response.status === 200) {
+               console.log("Mail envoyé.");
+            }
+         } catch (error) {
+            console.log(error);
          }
       },
 

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\ErrorException;
+use App\Mail\ArticleMail;
+use App\Mail\NewsletterMail;
 use App\Models\Article;
+use App\Models\Newsletter;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
@@ -122,6 +126,19 @@ class ArticleController extends Controller
             header('Erreur', true, 422);
             return response()->json($e->getMessage(), 422);
         }
+    }
+
+    public function sendMail(Request $request) {
+        $article = Article::orderBy('article.created_at', 'DESC')->get()->first();
+        $newsletters = Newsletter::all();
+        foreach($newsletters as $value) {
+            $data = [
+                'url' => 'http://localhost:8000/'. $article->id_sub_category . "/" . $article->slug,
+                'email' => $value->email
+            ];
+            Mail::to($data['email'])->send(new ArticleMail($data));
+        }
+        return response()->json('ok', 200);
     }
 
     /**

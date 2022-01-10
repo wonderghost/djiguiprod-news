@@ -77,6 +77,7 @@ Route::prefix('/request/banner')->group(function() {
 });
 
 Route::post('/request/newsletter', [NewsletterController::class, 'store']);
+Route::get('/request/sendMail', [ArticleController::class, 'sendMail']);
 
 Route::get('/{any}', function () {
     return view('app');
