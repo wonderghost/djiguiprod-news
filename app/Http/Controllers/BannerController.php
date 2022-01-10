@@ -108,7 +108,6 @@ class BannerController extends Controller
 
                 $path = Str::random(10).time(). '.'.$request->image->extension();
 
-                $banner = new Banner;
                 $banner->name = $request->name;
                 $banner->id_client = $request->id_client;
                 $banner->image = $path;

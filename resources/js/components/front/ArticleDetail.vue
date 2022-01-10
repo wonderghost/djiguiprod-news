@@ -48,7 +48,7 @@
       <v-divider></v-divider>
       <h3 class="text-center">Articles qui pourraient vous interesser.</h3>
       <v-divider></v-divider>
-      <div class="mt-8"></div>
+      <div class="my-8"></div>
       <v-row>
          <template v-for="(article, index) in articles.slice(0, 5)">
                <v-col cols="12" md="6" :key="index" class="my-2">

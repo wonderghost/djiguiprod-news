@@ -174,8 +174,6 @@ class ArticleController extends Controller
     
                 $path = Str::random(10).time(). '.'.$request->image->extension();
     
-    
-                $article = new Article;
                 $article->name = $request->name;
                 $article->resume = $request->resume;
                 $article->description = $request->description;

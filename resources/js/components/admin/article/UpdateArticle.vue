@@ -80,7 +80,7 @@ export default {
                formData.append("id_sub_category", this.article.id_sub_category);
                formData.append("_token", this.article._token);
 
-               let response = await axios.put("/request/article/" + this.$route.params.slug + "/update", formData, {
+               let response = await axios.post("/request/article/" + this.$route.params.slug + "/update", formData, {
                   Headers: {
                      "Content-type": "multipart/form-data",
                   },

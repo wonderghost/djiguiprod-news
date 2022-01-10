@@ -52,7 +52,7 @@ Route::prefix('/request/article')->group(function() {
     Route::get('', [ArticleController::class, 'index']);
     Route::post('/store', [ArticleController::class, 'store'])->middleware('auth');
     Route::get('/{slug}/show', [ArticleController::class, 'show']);
-    Route::put('/{slug}/update', [ArticleController::class, 'update'])->middleware('auth');
+    Route::post('/{slug}/update', [ArticleController::class, 'update'])->middleware('auth');
     Route::delete('/{slug}/delete', [ArticleController::class, 'destroy'])->middleware('auth');
 });
 
@@ -72,7 +72,7 @@ Route::prefix('/request/banner')->group(function() {
     Route::get('', [BannerController::class, 'index']);
     Route::post('/store', [BannerController::class, 'store'])->middleware('auth');
     Route::get('/{slug}/show', [BannerController::class, 'show']);
-    Route::put('/{slug}/update', [BannerController::class, 'update'])->middleware('auth');
+    Route::post('/{slug}/update', [BannerController::class, 'update'])->middleware('auth');
     Route::delete('/{slug}/delete', [BannerController::class, 'destroy'])->middleware('auth');
 });
 

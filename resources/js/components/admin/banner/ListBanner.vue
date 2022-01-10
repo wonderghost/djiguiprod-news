@@ -209,7 +209,7 @@ export default {
         formData.append("image", this.singleBanner.image)
         formData.append("_token", this.form._token)
 
-        let response = await axios.put(
+        let response = await axios.post(
           "/request/banner/" + this.singleBanner.id + "/update",
           formData
         );
