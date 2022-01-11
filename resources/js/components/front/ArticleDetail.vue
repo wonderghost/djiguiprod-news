@@ -44,7 +44,7 @@
       <v-col cols="12" md="2"></v-col>
    </v-row>
 
-   <div class="mt-10" v-if="articles.length > 0">
+   <div class="my-10" v-if="articles.length > 0">
       <v-divider></v-divider>
       <h3 class="text-center">Articles qui pourraient vous interesser.</h3>
       <v-divider></v-divider>

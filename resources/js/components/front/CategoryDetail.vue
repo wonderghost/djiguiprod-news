@@ -113,7 +113,7 @@
    </div>
 
    <div v-else>
-      <h2 v-if="dialog == false" class="text-center display-2">Il n'existe pas d'article pour cette ca</h2>
+      <h2 v-if="dialog == false" class="text-center display-2 my-8">Il n'existe pas d'article pour cette ca</h2>
    </div>
 
    <v-dialog v-model="dialog" hide-overlay persistent width="300">
