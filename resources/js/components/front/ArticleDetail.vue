@@ -1,10 +1,18 @@
 <template>
 <v-app>
-   <meta property="og:url" :content="encodeURI(loc)" />
+   <!-- <meta property="og:url" :content="encodeURI(loc)" />
    <meta property="og:type" content="website" />
    <meta property="og:title" content="Djiguiprod News" />
    <meta property="og:description" content="Magazine culturelle" />
-   <meta property="og:image" :content="'/uploads/' + article.image" />
+   <meta property="og:image" :content="'/uploads/' + article.image" /> -->
+
+   <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+   <meta property="og:type"          content="website" />
+   <meta property="og:title"         content="Your Website Title" />
+   <meta property="og:description"   content="Your description" />
+   <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
+
+
    <v-row>
       <v-col cols="12" md="2"></v-col>
       <v-col cols="12" md="8">
