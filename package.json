@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "moment": "^2.29.1",
+        "vue-meta": "^2.4.0",
         "vue-quill-editor": "^3.0.6",
         "vue-router": "^3.5.2",
         "vuetify": "^2.5.6",

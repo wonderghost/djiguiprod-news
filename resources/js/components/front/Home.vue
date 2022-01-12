@@ -139,6 +139,10 @@ export default {
         ArticleCard,
         Pub,
     },
+
+    metaInfo: {
+        title: "Djiguiprod"
+    },
     data() {
         return {
             articles: [],

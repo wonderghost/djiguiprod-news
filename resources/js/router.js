@@ -12,8 +12,16 @@ import Client from './components/admin/client/Client.vue';
 import Banner from './components/admin/banner/Banner.vue';
 import Article from './components/admin/article/Article.vue';
 import UpdateArticle from './components/admin/article/UpdateArticle.vue';
+import VueMeta from 'vue-meta'
 
 Vue.use(VueRouter)
+Vue.use(VueMeta, {
+    keyName: 'metaInfo',
+    attribute: 'data-vue-meta',
+    ssrAttribute: 'data-vue-meta-server-rendered',
+    tagIDKeyName: 'vmid',
+    refreshOnceOnNavigation: true
+})
 
 const router = new VueRouter({
     mode: 'history',

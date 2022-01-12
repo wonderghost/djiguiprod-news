@@ -41,7 +41,10 @@ Vue.component('dashboard',require('./components/admin/Dashboard.vue').default);
 import Vue from 'vue';
 import store from './store.js'
 import vuetify from './plugins/vuetify';
-import router from './router.js'
+import router from './router.js';
+// import VueMeta from 'vue-meta';
+
+// Vue.use(VueMeta);
 const app = new Vue({
     el: '#app',
     store,
