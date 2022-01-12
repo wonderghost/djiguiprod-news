@@ -11,7 +11,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="L’article de l’ONG internationale est formel : « des joueuses de l’équipe nationale féminine de basketball des"/>
     <meta property="og:description" content="L’article de l’ONG internationale est formel : « des joueuses de l’équipe nationale féminine de basketball des" />
-    <meta property="og:image" content="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.auto-moto.com%2Factualite%2Fen-chiffres%2Fvoitures-plus-vendues-france-2020-classement-264440.html&psig=AOvVaw32DrWFSXfBkzHHPM41COs-&ust=1642091424401000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOjnubTRrPUCFQAAAAAdAAAAABAD" />
+    <meta property="og:image" content="https://news.djiguiprod.com/uploads/0RDHnPscHo1627901040.jpg" />
     {{-- <title>{{ config('app.name') }}</title> --}}
 </head>
 <body>
