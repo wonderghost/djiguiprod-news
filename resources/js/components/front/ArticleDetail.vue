@@ -98,18 +98,22 @@ export default {
             title: "Djiguiprod | " + this.article.name,
             meta: [
                {
+                  vmid: 'og:url',
                   property: 'og:url',
                   content: encodeURI(this.loc),
                },
                {
+                  vmid: 'og:type',
                   property: 'og:type',
                   content: 'website'
                },
                {
+                  vmid: 'og:description',
                   property: 'og:description',
                   content: 'Magazine culturelle'
                },
                {
+                  vmid: 'og:image',
                   property: 'og:image',
                   content: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.auto-moto.com%2Factualite%2Fen-chiffres%2Fvoitures-plus-vendues-france-2020-classement-264440.html&psig=AOvVaw32DrWFSXfBkzHHPM41COs-&ust=1642091424401000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOjnubTRrPUCFQAAAAAdAAAAABAD'
                }
