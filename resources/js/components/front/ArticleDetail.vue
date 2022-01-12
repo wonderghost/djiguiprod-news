@@ -110,8 +110,8 @@ export default {
                   content: 'Magazine culturelle'
                },
                {
-                  property: 'og: image',
-                  content: '/uploads/' + this.article.image
+                  property: 'og:image',
+                  content: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.auto-moto.com%2Factualite%2Fen-chiffres%2Fvoitures-plus-vendues-france-2020-classement-264440.html&psig=AOvVaw32DrWFSXfBkzHHPM41COs-&ust=1642091424401000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOjnubTRrPUCFQAAAAAdAAAAABAD'
                }
 
             ]
@@ -192,16 +192,7 @@ export default {
         this.getArticle();
         this.getArticleBySubCategory();
 
-        (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-
-        console.log(this);
+        console.log(encodeURI(this.loc));
     }
 };
 </script>
