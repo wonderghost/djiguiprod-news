@@ -92,7 +92,6 @@ export default {
                   this.singleEditCategory
                );
                if (response.status == 200) {
-                  console.log(response);
                   this.isLoading = false;
                   this.message = response.data.message;
                   this.snackbar = true;
@@ -114,7 +113,6 @@ export default {
                   "/request/article/" + this.singleArticle.slug + "/delete"
                );
                if (respose.status == 200) {
-                  console.log(respose);
                   this.isLoading = false;
                   this.message = respose.data.message;
                   this.dialog = false;

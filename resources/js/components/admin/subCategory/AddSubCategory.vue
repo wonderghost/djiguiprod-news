@@ -80,7 +80,6 @@ export default {
                this.form._token = this.token;
                let response = await axios.post("request/sub-category/store", this.form);
                if (response.status == 200) {
-                  console.log(response);
                   this.message = response.data.message;
                   this.snackbar = true;
                   this.isLoading = false;

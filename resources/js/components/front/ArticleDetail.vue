@@ -152,7 +152,6 @@ export default {
                let response = await axios.get("/request/articles/" + this.$route.params.subcategory);
 
                if (response.status == 200) {
-                  console.log(response);
                   this.articles = response.data;
                }
          } catch (error) {

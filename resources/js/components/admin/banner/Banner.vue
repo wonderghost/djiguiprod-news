@@ -27,7 +27,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getBanners");
-    console.log(this.banners)
   },
   computed: {
     banners() {

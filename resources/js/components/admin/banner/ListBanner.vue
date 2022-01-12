@@ -214,7 +214,6 @@ export default {
           formData
         );
         if (response.status == 200) {
-          console.log(response);
           this.isLoading = false;
           this.message = response.data.message;
           this.snackbar = true;
@@ -247,7 +246,6 @@ export default {
           "/request/banner/" + this.singleBanner.id + "/delete"
         );
         if (respose.status == 200) {
-          console.log(respose);
           this.isLoading = false;
           this.message = respose.data.message;
           this.dialog = false;

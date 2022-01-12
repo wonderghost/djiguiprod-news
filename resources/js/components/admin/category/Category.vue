@@ -27,7 +27,6 @@ export default {
     },
     mounted() {
         this.$store.dispatch("getCategories");
-        console.log(this.categories)
     },
     computed: {
         categories() {

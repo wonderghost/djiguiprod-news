@@ -30,7 +30,6 @@ export default {
          try {
             let response = await axios.get('/request/sub-category');
             if (response.status == 200) {
-               console.log(response);
                this.subCategories = response.data;
             }
          } catch (error) {

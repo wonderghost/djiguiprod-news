@@ -34,7 +34,6 @@ export default {
     },
     mounted() {
         this.$store.dispatch("getArticles");
-        console.log(this.articles)
     },
     computed: {
         articles() {

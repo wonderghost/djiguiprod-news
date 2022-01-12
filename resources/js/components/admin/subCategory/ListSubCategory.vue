@@ -177,7 +177,6 @@ export default {
                   "/request/sub-category/" + this.singleEditSubCategory.slug + "/delete"
                );
                if (response.status == 200) {
-                  console.log(response);
                   this.dialog = false;
                   this.snackbar = true;
                   this.message = response.data.message;

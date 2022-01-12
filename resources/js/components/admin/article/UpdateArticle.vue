@@ -86,7 +86,6 @@ export default {
                   },
                });
                if (response.status == 200) {
-                  console.log(response);
                   this.$router.push('/admin/articles/list')
                }
          } catch (error) {
@@ -109,7 +108,6 @@ export default {
 
    mounted() {
       this.getArticle();
-      // console.log(this.article);
       this.getSubCategories();
       this.$store.dispatch("actifUser");
    },

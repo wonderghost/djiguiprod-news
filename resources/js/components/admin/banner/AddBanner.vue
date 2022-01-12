@@ -123,7 +123,6 @@ export default {
 
         let response = await axios.post("/request/banner/store", formData);
         if (response.status == 200) {
-          console.log(response);
           this.message = response.data.message;
           this.snackbar = true;
           this.isLoading = false;
@@ -152,7 +151,6 @@ export default {
 
   mounted() {
     this.$store.dispatch("getClients");
-    console.log(this.clients);
   },
 
   computed: {

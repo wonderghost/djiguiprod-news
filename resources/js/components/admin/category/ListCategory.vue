@@ -166,7 +166,6 @@ export default {
          try {
             let respose = await axios.delete("/request/category/" + this.singleCategory.slug + "/delete");
             if (respose.status == 200) {
-               console.log(respose);
                this.isLoading = false
                this.message = respose.data.message;
                this.dialog = false;

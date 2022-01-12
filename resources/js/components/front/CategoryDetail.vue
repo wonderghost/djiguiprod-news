@@ -169,12 +169,10 @@ export default {
          try {
                let response = await axios.get('/request' + this.$route.path + '?page=' + this.page);
                if (response.status == 200) {
-                  console.log(this.$route.path + '?page=' + this.page);
                   this.articles = response.data.data;
                   this.page = response.data.current_page;
                   this.taille = response.data.last_page;
                   this.dialog = false;
-                  console.log(response.data);
                }
          } catch (error) {
                this.dialog = false;
