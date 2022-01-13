@@ -79,6 +79,12 @@ Route::prefix('/request/banner')->group(function() {
 Route::post('/request/newsletter', [NewsletterController::class, 'store']);
 Route::get('/request/sendMail', [ArticleController::class, 'sendMail']);
 
-Route::get('/{any}', function () {
-    return view('app');
-})->where('any', '.*');
+Route::get('/', function() {
+    return view('home');
+});
+Route::get('/categorie/{subCategory}', function() {
+    return view('category');
+});
+Route::get('/categorie/{subCategory}', function() {
+    return view('article');
+});

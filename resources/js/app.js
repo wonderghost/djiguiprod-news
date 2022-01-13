@@ -31,6 +31,8 @@ Vue.filter('formatDate', function (value) {
 Vue.component('login',require('./components/Login.vue').default);
 Vue.component('app',require('./components/App.vue').default);
 Vue.component('dashboard',require('./components/admin/Dashboard.vue').default);
+Vue.component('home',require('./components/front/Home.vue').default);
+Vue.component('category',require('./components/front/CategoryDetail.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -41,13 +43,11 @@ Vue.component('dashboard',require('./components/admin/Dashboard.vue').default);
 import Vue from 'vue';
 import store from './store.js'
 import vuetify from './plugins/vuetify';
-import router from './router.js';
 // import VueMeta from 'vue-meta';
 
 // Vue.use(VueMeta);
 const app = new Vue({
     el: '#app',
     store,
-    router,
     vuetify
 });

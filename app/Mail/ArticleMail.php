@@ -29,6 +29,6 @@ class ArticleMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('article');
+        return $this->markdown('emails.article');
     }
 }
