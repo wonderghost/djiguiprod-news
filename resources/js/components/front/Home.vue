@@ -9,7 +9,7 @@
                     <v-carousel cycle hide-delimiter-background show-arrows-on-hover>
                         <v-carousel-item v-for="(article, index) in articles.slice(0, 5)" :key="index">
                             <v-hover v-slot="{ hover }" open-delay="200">
-                                <v-card class="mx-auto" max-width="900" max-height="900" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" href="/categorie">
+                                <v-card class="mx-auto" max-width="900" max-height="900" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" :href="'/articles/' + article.slug">
                                     <v-img class="white--text align-end" height="450px" :lazy-src="'/uploads/' + article.image" :src="'/uploads/' + article.image">
                                         <template v-slot:placeholder>
                                             <v-row class="fill-height ma-0" align="center" justify="center">
@@ -60,7 +60,7 @@
                     <template v-for="(article, index) in articles.slice(1, 4)">
                         <v-col cols="12" md="4" :key="index">
                             <v-hover v-slot="{ hover }" open-delay="200">
-                                <v-card class="mx-auto" max-width="400" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" @click="openDetail(article)">
+                                <v-card class="mx-auto" max-width="400" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" :href="'/articles/' + article.slug">
                                     <v-img class="white--text align-end" height="200px" :src="'/uploads/' + article.image">
                                         <template v-slot:placeholder>
                                             <v-row class="fill-height ma-0" align="center" justify="center">
@@ -89,7 +89,7 @@
             </div>
 
             <h1 class="mt-2">
-                <router-link to="/categorie/sports" class="black--text text-decoration-none">Sports</router-link>
+                <span class="black--text text-decoration-none">Sports</span>
             </h1>
             <v-divider></v-divider>
 
@@ -106,7 +106,7 @@
             </div>
 
             <h1 class="mt-5">
-                <router-link to="/categorie/cultures" class="black--text text-decoration-none">Cultures</router-link>
+                <span class="black--text text-decoration-none">Cultures</span>
             </h1>
             <v-divider></v-divider>
 
@@ -161,13 +161,21 @@ export default {
     data() {
         return {
             articles: [],
-            dialog: true
+            dialog: true,
+            showScroll: false
         };
     },
 
     mounted() {
         this.getArticles();
         this.$store.dispatch("getBanners");
+        window.addEventListener('scroll', function (event) {
+            if (window.scrollY > 100) {
+                scroll.showScroll = true
+            } else {
+                scroll.showScroll = false
+            }
+        })
     },
 
     methods: {
@@ -181,10 +189,6 @@ export default {
             } catch (error) {
                 console.log(error);
             }
-        },
-
-        openDetail(a) {
-            this.$router.push("/" + a.id_sub_category + "/" + a.slug);
         },
     },
     computed: {

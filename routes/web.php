@@ -82,9 +82,9 @@ Route::get('/request/sendMail', [ArticleController::class, 'sendMail']);
 Route::get('/', function() {
     return view('home');
 });
-Route::get('/categorie/{subCategory}', function() {
-    return view('category');
+Route::get('/categorie/{subCategory}', function($subCategory) {
+    return view('category', ['subCategory' => $subCategory]);
 });
-Route::get('/categorie/{subCategory}', function() {
-    return view('article');
+Route::get('/articles/{slug}', function($article) {
+    return view('article', ['article' => $article]);
 });

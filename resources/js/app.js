@@ -33,7 +33,7 @@ Vue.component('app',require('./components/App.vue').default);
 Vue.component('dashboard',require('./components/admin/Dashboard.vue').default);
 Vue.component('home',require('./components/front/Home.vue').default);
 Vue.component('category',require('./components/front/CategoryDetail.vue').default);
-
+Vue.component('detail',require('./components/front/ArticleDetail.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

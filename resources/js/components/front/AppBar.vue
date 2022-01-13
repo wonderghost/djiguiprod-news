@@ -45,10 +45,8 @@
     <v-app-bar flat app color="grey darken-3">
         <v-app-bar-nav-icon class="d-flex d-md-none" color="white" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>
-            <router-link to="/">
-                <v-img max-height="80" max-width="150" src="/images/logo-djigui.png">
+                <v-img href="/" max-height="80" max-width="150" src="/images/logo-djigui.png">
                 </v-img>
-            </router-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <div class="d-none d-md-flex">
@@ -87,7 +85,7 @@
                     <v-flex xs6>
                         <v-list three-line>
                             <template v-for="(item, index) in searchResponse">
-                                <v-list-item :key="index" @click="openDetail(item)">
+                                <v-list-item :key="index" id="search" :href="'/articles/' + item.slug">
                                     <v-list-item-avatar>
                                         <v-img :src="'/uploads/' + item.image"></v-img>
                                     </v-list-item-avatar>
@@ -224,16 +222,8 @@ export default {
         }
     },
     methods: {
-        openDetail(a) {
-            this.search = "";
-            this.isSearching = false;
-            this.$router.push("/" + a.id_sub_category + "/" + a.slug);
-        },
         openSearch() {
             return (this.isSearching = !this.isSearching);
-        },
-        goHome() {
-            this.$router.push("/");
         },
 
         onSearch: async function () {

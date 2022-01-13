@@ -1,126 +1,95 @@
 <template>
 <v-app>
-    <!-- <meta property="og:url" :content="encodeURI(loc)" />
-   <meta property="og:type" content="website" />
-   <meta property="og:title" content="Djiguiprod News" />
-   <meta property="og:description" content="Magazine culturelle" />
-   <meta property="og:image" :content="'/uploads/' + article.image" /> -->
+    <AppBar />
 
-    <!-- <meta property="og:url" content="https://www.your-domain.com/your-page.html" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Your Website Title" />
-    <meta property="og:description" content="Your description" />
-    <meta property="og:image" content="https://www.your-domain.com/path/image.jpg" /> -->
+    <v-main class="d-flex justify-center align-center">
+        <v-container>
+            <v-row>
+                <v-col cols="12" md="2"></v-col>
+                <v-col cols="12" md="8">
+                    <h1 class="text-center">{{ article.name }}</h1>
+                    <v-card class="mx-auto my-5" max-width="900" max-height="900" flat>
+                        <v-img class="white--text align-end" height="450px" :src="'/uploads/' + article.image">
+                        </v-img>
+                        <v-card-text>
+                            <div class="d-flex justify-space-between">
+                                <p class="text-left">
+                                    <v-icon>mdi-account</v-icon> Autheur: {{ article.userName }}
+                                </p>
+                                <p class="mr-16 text--grey">
+                                    <v-icon>mdi-clock</v-icon>
+                                    {{ article.created_at | formatDate}}
+                                </p>
+                            </div>
+                        </v-card-text>
+                        <v-card-text class="text-center">
+                            <v-btn small fab v-for="(icon, index) in socialMedia" :key="index" class="mx-2" :href="icon.href + encodeURI(loc)">
+                                <v-icon :color="icon.color" size="250%">{{ icon.icon }}</v-icon>
+                            </v-btn>
+                            <div class="fb-share-button" :data-href="encodeURI(loc)" data-layout="button_count">
+                            </div>
+                        </v-card-text>
+                    </v-card>
 
-    <v-row>
-        <v-col cols="12" md="2"></v-col>
-        <v-col cols="12" md="8">
-            <h1 class="text-center">{{ article.name }}</h1>
-            <v-card class="mx-auto my-5" max-width="900" max-height="900" flat>
-                <v-img class="white--text align-end" height="450px" :src="'/uploads/' + article.image">
-                </v-img>
-                <v-card-text>
-                    <div class="d-flex justify-space-between">
-                        <p class="text-left">
-                            <v-icon>mdi-account</v-icon> Autheur: {{ article.userName }}
-                        </p>
-                        <p class="mr-16 text--grey">
-                            <v-icon>mdi-clock</v-icon>
-                            {{ article.created_at | formatDate}}
-                        </p>
-                    </div>
-                </v-card-text>
-                <v-card-text class="text-center">
-                    <!-- <v-btn
-            small
-            fab
-            v-for="(icon, index) in socialMedia"
-            :key="index"
-            class="mx-2"
-            :href="icon.href + encodeURI(loc)"
-         >
-         <v-icon :color="icon.color" size="250%">{{ icon.icon }}</v-icon>
-         </v-btn> -->
-                    <div class="fb-share-button" :data-href="encodeURI(loc)" data-layout="button_count">
-                    </div>
-                </v-card-text>
-            </v-card>
-
-            <p v-html="article.description"></p>
-        </v-col>
-        <v-col cols="12" md="2"></v-col>
-    </v-row>
-
-    <div class="my-10" v-if="articles.length > 0">
-        <v-divider></v-divider>
-        <h3 class="text-center">Articles qui pourraient vous interesser.</h3>
-        <v-divider></v-divider>
-        <div class="my-8"></div>
-        <v-row>
-            <template v-for="(article, index) in articles.slice(0, 5)">
-                <v-col cols="12" md="6" :key="index" class="my-2">
-                    <v-hover v-slot="{ hover }" open-delay="200">
-                        <v-card flat :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" @click="openDetail(article)">
-                            <v-row>
-                                <v-col cols="12" md="6">
-                                    <v-img class="white--text align-end" height="200px" :src="'/uploads/' + article.image">
-                                    </v-img>
-                                </v-col>
-                                <v-col cols="12" md="6">
-                                    <h3>{{ article.name.substr(0, 70) }}</h3>
-                                    <br />
-                                    <p v-if="article.resume != null" v-text="article.resume.substr(0, 80) + '...'"></p>
-                                    <p v-if="article.resume === null" v-text="article.name.substr(0, 80) + '...'"></p>
-                                </v-col>
-                            </v-row>
-                        </v-card>
-                    </v-hover>
+                    <p v-html="article.description"></p>
                 </v-col>
-            </template>
-        </v-row>
-    </div>
+                <v-col cols="12" md="2"></v-col>
+            </v-row>
 
-    <v-dialog v-model="dialog" hide-overlay persistent width="300">
-        <v-card color="primary" dark>
-            <v-card-text>
-                Veuillez patienter...
-                <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
-            </v-card-text>
-        </v-card>
-    </v-dialog>
+            <div class="my-10" v-if="articles.length > 0">
+                <v-divider></v-divider>
+                <h3 class="text-center">Articles qui pourraient vous interesser.</h3>
+                <v-divider></v-divider>
+                <div class="my-8"></div>
+                <v-row>
+                    <template v-for="(article, index) in articles.slice(0, 5)">
+                        <v-col cols="12" md="6" :key="index" class="my-2">
+                            <v-hover v-slot="{ hover }" open-delay="200">
+                                <v-card flat :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" @click="openDetail(article)">
+                                    <v-row>
+                                        <v-col cols="12" md="6">
+                                            <v-img class="white--text align-end" height="200px" :src="'/uploads/' + article.image">
+                                            </v-img>
+                                        </v-col>
+                                        <v-col cols="12" md="6">
+                                            <h3>{{ article.name.substr(0, 70) }}</h3>
+                                            <br />
+                                            <p v-if="article.resume != null" v-text="article.resume.substr(0, 80) + '...'"></p>
+                                            <p v-if="article.resume === null" v-text="article.name.substr(0, 80) + '...'"></p>
+                                        </v-col>
+                                    </v-row>
+                                </v-card>
+                            </v-hover>
+                        </v-col>
+                    </template>
+                </v-row>
+            </div>
+
+            <v-dialog v-model="dialog" hide-overlay persistent width="300">
+                <v-card color="primary" dark>
+                    <v-card-text>
+                        Veuillez patienter...
+                        <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+                    </v-card-text>
+                </v-card>
+            </v-dialog>
+        </v-container>
+    </v-main>
+
+    <Footer />
 </v-app>
 </template>
 
 <script>
+import AppBar from './AppBar.vue';
+import Footer from './Footer.vue';
 export default {
-    metaInfo() {
-        return {
-            title: "Djiguiprod | " + this.article.name,
-            meta: [
-               {
-                  vmid: 'og:url',
-                  property: 'og:url',
-                  content: encodeURI(this.loc),
-               },
-               {
-                  vmid: 'og:type',
-                  property: 'og:type',
-                  content: 'website'
-               },
-               {
-                  vmid: 'og:description',
-                  property: 'og:description',
-                  content: 'Magazine culturelle'
-               },
-               {
-                  vmid: 'og:image',
-                  property: 'og:image',
-                  content: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.auto-moto.com%2Factualite%2Fen-chiffres%2Fvoitures-plus-vendues-france-2020-classement-264440.html&psig=AOvVaw32DrWFSXfBkzHHPM41COs-&ust=1642091424401000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOjnubTRrPUCFQAAAAAdAAAAABAD'
-               }
-
-            ]
-        }
+    components: {
+        AppBar,
+        Footer
     },
+
+    props: ['article'],
     data() {
         return {
             article: {},
@@ -162,9 +131,11 @@ export default {
             this.dialog = true;
             try {
                 let response = await axios.get(
-                    "/request/article/" + this.$route.params.slug + "/show"
+                    "/request/article/" + this.$props.article + "/show"
                 );
+                console.log(response);
                 if (response.status == 200) {
+
                     this.article = response.data;
                     this.dialog = false;
                 }
@@ -176,7 +147,7 @@ export default {
 
         getArticleBySubCategory: async function () {
             try {
-                let response = await axios.get("/request/articles/" + this.$route.params.subcategory);
+                let response = await axios.get("/request/articles/" + this.$props.article.id_sub_category);
 
                 if (response.status == 200) {
                     this.articles = response.data;

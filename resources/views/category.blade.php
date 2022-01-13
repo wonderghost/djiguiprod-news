@@ -17,7 +17,7 @@
 <body>
 
     <div id="app">
-        <category></category>
+        <category id-category="{{ $subCategory }}"></category>
     </div>
     
     <script src="{{mix('js/app.js')}}"></script>

@@ -10,7 +10,7 @@
                     <v-col cols="12" md="9" class="mt-3">
                         <template v-for="(article, index) in articles.slice(0, 1)">
                             <v-hover v-slot="{ hover }" open-delay="200" :key="index">
-                                <v-card class="mx-auto mb-4" max-width="900" max-height="900" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" :href="'/'" >
+                                <v-card class="mx-auto mb-4" max-width="900" max-height="900" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" :href="'/articles/' + article.slug">
                                     <v-img class="white--text align-end" height="450px" :src="'/uploads/' + article.image">
                                         <template v-slot:placeholder>
                                             <v-row class="fill-height ma-0" align="center" justify="center">
@@ -57,7 +57,7 @@
                 <template v-for="(article, index) in articles.slice(1, 4)">
                     <v-col cols="12" md="4" :key="index">
                         <v-hover v-slot="{ hover }" open-delay="200">
-                            <v-card class="mx-auto" max-width="400" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" @click="openDetail(article)">
+                            <v-card class="mx-auto" max-width="400" :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" :href="'/articles/' + article.slug">
                                 <v-img class="white--text align-end" height="200px" :src="'/uploads/' + article.image">
                                     <template v-slot:placeholder>
                                         <v-row class="fill-height ma-0" align="center" justify="center">
@@ -88,7 +88,7 @@
                     <template v-for="(article, index) in articles.slice(3, 9)">
                         <v-col cols="12" md="6" :key="index" class="my-2">
                             <v-hover v-slot="{ hover }" open-delay="200">
-                                <v-card flat :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" @click="openDetail(article)">
+                                <v-card flat :elevation="hover ? 16 : 2" :class="{ 'on-hover': hover }" :href="'/articles/' + article.slug">
                                     <v-row>
                                         <v-col cols="12" md="6">
                                             <v-img class="white--text align-end" height="200px" :src="'/uploads/' + article.image">
@@ -139,6 +139,7 @@ import Pub from './Pub.vue';
 import AppBar from './AppBar.vue';
 import Footer from './Footer.vue';
 export default {
+    props: ['idCategory'],
     components: {
         Pub,
         AppBar,
@@ -178,8 +179,8 @@ export default {
         getArticles: async function () {
             this.dialog = true;
             try {
-                // let response = await axios.get('/request' + this.$route.path + '?page=' + this.page);
-                let response = await axios.get('/request/categorie/cultures?page=' + this.page);
+                let response = await axios.get('/request/categorie/' + this.$props.idCategory + '?page=' + this.page);
+                // let response = await axios.get('/request/categorie/cultures?page=' + this.page);
                 if (response.status == 200) {
                     this.articles = response.data.data;
                     this.page = response.data.current_page;
