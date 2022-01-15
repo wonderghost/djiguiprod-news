@@ -24,7 +24,7 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->middleware('auth');
 
-Route::get('/login',[Auth\LoginController::class,'index'])->middleware('guest');
+Route::get('/login',[Auth\LoginController::class,'index'])->middleware('guest')->name('login');
 Route::post('/login',[Auth\LoginController::class,'login']);
 Route::post('/create-user', [Auth\LoginController::class, 'createUser']);
 Route::get('/request/users', [Auth\LoginController::class, 'users']);

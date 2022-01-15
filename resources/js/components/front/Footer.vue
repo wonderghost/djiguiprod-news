@@ -1,16 +1,10 @@
 <template>
    <v-footer padless dark>
-      <v-card flat tile class="white--text text-center" color="grey darken-3">
+      <v-card flat tile class="white--text " color="grey darken-3">
          <v-row>
             <v-col cols="12" md="4">
                <v-card-text class="text-left ">
-                  Depuis Mars 2018, Djigui Production accompagne des acteurs
-                  culturels dans les domaines Culturel, Artistique et
-                  l'événementiel. Si votre objectif est de vous produire sur scène
-                  ou d’organiser des événements, sachez que nous apportons des
-                  solutions pour développer votre modèle économique, votre talent
-                  artistique et rendre efficient votre personne afin de vous
-                  réaliser pleinement.
+                  
                </v-card-text>
             </v-col>
             <v-col cols="12" md="4">
@@ -19,20 +13,18 @@
                   Newsletter
                   <v-form @submit.prevent="onNewsletter()">
                         <v-row>
-                           <v-col cols="12" md="8">
-                              <v-text-field v-model="newsletter.email" color="withe darken-2" label="Adresse mail" required>
+                           <v-col cols="12">
+                              <v-text-field outlined dense prepend-inner-icon="mdi-email" @click:append="onNewsletter()" append-icon="mdi-send" v-model="newsletter.email" color="withe darken-2" label="Adresse mail" required>
                               </v-text-field>
                            </v-col>
-                           <v-col cols="12" md="4">
-                              <v-btn class="my-2" color="primary" type="submit" :loading="isLoading">S'abonner</v-btn>
-                           </v-col>
+                              <!-- <v-btn class="my-2" color="primary" type="submit" :loading="isLoading">S'abonner</v-btn> -->
                         </v-row>
                   </v-form>
                </v-card-text>
             </v-col>
 
             <v-col cols="12" md="4">
-               <v-card-text class="text-center">
+               <v-card-text >
                   <v-row dense>
                         <v-col cols="12" md="12">
                            <v-icon left>mdi-google-maps</v-icon>
@@ -57,10 +49,19 @@
             </v-col>
          </v-row>
 
+         <v-dialog v-model="isLoading" hide-overlay persistent width="300">
+                <v-card color="primary" dark>
+                    <v-card-text>
+                        Veuillez patienter...
+                        <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+                    </v-card-text>
+                </v-card>
+            </v-dialog>
+
          <v-divider></v-divider>
 
-         <v-card-text class="white--text">
-            {{ new Date().getFullYear() }} — <strong>DJIGUIPROD NEWS</strong> &copy; POWERED BY <span>SMARTECH</span>
+         <v-card-text class="white--text text-center">
+            {{ new Date().getFullYear() }} — <strong>Djiguiprod New</strong> &copy; Powered by <span>SMARTECH</span>
          </v-card-text>
       </v-card>
 

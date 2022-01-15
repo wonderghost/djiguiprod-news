@@ -59,11 +59,6 @@ export default {
             tabs: null,
             drawer: null,
             items: [
-              // {
-              //       icon: "mdi-view-dashboard",
-              //       text: "Dashboard",
-              //       value: "dashboard",
-              //   },
                 {
                     icon: "mdi-file",
                     text: "Articles",

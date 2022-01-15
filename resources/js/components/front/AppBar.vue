@@ -104,9 +104,12 @@
         </v-layout>
     </v-container>
 
-    <!-- <v-btn v-if="user" style="position: fixed; right: 1%; bottom: 1%; z-index: 1" fab dark small color="primary" class="d-none d-lg-block" @click.stop="drawer = !drawer">
-        <v-icon dark> {{ menuIcon }} </v-icon>
-    </v-btn> -->
+    <v-btn v-if="user" fixed bottom right fab dark small class="mb-12" color="primary" href="/dashboard">
+        <v-icon>mdi-view-dashboard</v-icon>
+    </v-btn>
+    <v-btn v-if="user" fixed bottom right fab dark small color="primary" @click="logout()">
+        <v-icon>mdi-logout</v-icon>
+    </v-btn>
 
 </div>
 </template>
@@ -204,10 +207,6 @@ export default {
     },
 
     computed: {
-        menuIcon() {
-            let data = this.drawer ? "mdi-close" : "mdi-menu";
-            return data;
-        },
         user() {
             return this.$store.state.user;
         },
