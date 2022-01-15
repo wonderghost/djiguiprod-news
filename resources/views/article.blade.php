@@ -10,7 +10,7 @@
     <meta property="og:url" content="{{ 'https://news.djiguiprod.com/articles/'. $article->slug }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="{{ $article->name }}"/>
-    <meta property="og:description" content="{{ $article->resume }}" />
+    <meta property="og:description" content="{{ $article->description }}" />
     <meta property="og:image" content="{{ '/uploads/'. $article->image  }}" />
 </head>
 <body>
