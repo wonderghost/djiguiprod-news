@@ -7,12 +7,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{mix('css/app.css')}}">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    {{-- <meta property="og:url" content="https://news.djiguiprod.com/" />
+    <meta property="og:url" content="{{ 'https://news.djiguiprod.com/articles/'. $article->slug }}" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="L’article de l’ONG internationale est formel : « des joueuses de l’équipe nationale féminine de basketball des"/>
-    <meta property="og:description" content="L’article de l’ONG internationale est formel : « des joueuses de l’équipe nationale féminine de basketball des" />
-    <meta property="og:image" content="https://news.djiguiprod.com/uploads/0RDHnPscHo1627901040.jpg" /> --}}
-    <title>{{ config('app.name') }}</title>
+    <meta property="og:title" content="{{ $article->name }}"/>
+    <meta property="og:description" content="{{ $article->resume }}" />
+    <meta property="og:image" content="{{ '/uploads/'. $article->image  }}" />
 </head>
 <body>
 
