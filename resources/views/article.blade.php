@@ -16,7 +16,7 @@
 <body>
 
     <div id="app">
-        <detail article="{{ $article }}"></detail>
+        <detail article="{{ $article->slug }}"></detail>
     </div>
     
     <script src="{{mix('js/app.js')}}"></script>

@@ -89,7 +89,13 @@ export default {
         Footer
     },
 
-    props: ['article'],
+    props: {
+        article: {
+            type: String,
+            required: true,
+            default: {}
+        }
+    },
     data() {
         return {
             article: {},
@@ -147,7 +153,7 @@ export default {
 
         getArticleBySubCategory: async function () {
             try {
-                let response = await axios.get("/request/articles/" + this.$props.article.id_sub_category);
+                let response = await axios.get("/request/articles/" + this.$props.article);
 
                 if (response.status == 200) {
                     this.articles = response.data;
@@ -167,7 +173,7 @@ export default {
         this.getArticle();
         this.getArticleBySubCategory();
 
-        console.log(encodeURI(this.loc));
+        console.log(this.$props.article);
     }
 };
 </script>

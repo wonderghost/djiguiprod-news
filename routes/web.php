@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -85,6 +86,7 @@ Route::get('/', function() {
 Route::get('/categorie/{subCategory}', function($subCategory) {
     return view('category', ['subCategory' => $subCategory]);
 });
-Route::get('/articles/{slug}', function($article) {
+Route::get('/articles/{slug}', function($slug) {
+    $article = Article::find($slug);
     return view('article', ['article' => $article]);
 });

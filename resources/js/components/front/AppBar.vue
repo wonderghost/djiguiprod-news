@@ -1,12 +1,12 @@
 <template>
 <div>
     <v-navigation-drawer height="100%" disable-resize-watcher v-model="drawer" color="#F4F5F9" app>
-        <v-list-item to="/" style="background-color: #424242" class="py-1">
+        <v-list-item href="/" style="background-color: #424242" class="py-1">
             <v-img max-height="100" max-width="150" src="/images/logo-djigui.png">
             </v-img>
         </v-list-item>
 
-        <v-list-item class="d-flex d-md-none" v-for="item in categories" :key="item.title" :to="'/categorie/' + item.slug">
+        <v-list-item class="d-flex d-md-none" v-for="item in categories" :key="item.title" :href="'/categorie/' + item.slug">
             <v-list-item-content>
                 <v-list-item-title>{{ item.name }}</v-list-item-title>
             </v-list-item-content>
@@ -14,7 +14,7 @@
         <v-divider></v-divider>
         <v-list nav dense v-if="user">
             <v-list-item-group v-model="selectedItem" color="primary">
-                <v-list-item v-for="(item, i) in items" :key="i" :to="item.route">
+                <v-list-item v-for="(item, i) in items" :key="i" :href="item.route">
                     <v-list-item-icon>
                         <v-icon>{{ item.icon }}</v-icon>
                     </v-list-item-icon>
