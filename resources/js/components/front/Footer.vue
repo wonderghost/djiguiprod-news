@@ -4,7 +4,7 @@
          <v-row>
             <v-col cols="12" md="4">
                <v-card-text class="text-left ">
-                  
+                  Djiguiprod site culturel et d'acualité
                </v-card-text>
             </v-col>
             <v-col cols="12" md="4">
@@ -17,7 +17,6 @@
                               <v-text-field outlined dense prepend-inner-icon="mdi-email" @click:append="onNewsletter()" append-icon="mdi-send" v-model="newsletter.email" color="withe darken-2" label="Adresse mail" required>
                               </v-text-field>
                            </v-col>
-                              <!-- <v-btn class="my-2" color="primary" type="submit" :loading="isLoading">S'abonner</v-btn> -->
                         </v-row>
                   </v-form>
                </v-card-text>
