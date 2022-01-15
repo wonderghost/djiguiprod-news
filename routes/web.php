@@ -90,3 +90,6 @@ Route::get('/articles/{slug}', function($slug) {
     $article = Article::find($slug);
     return view('article', ['article' => $article]);
 });
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth');

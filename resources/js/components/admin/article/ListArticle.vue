@@ -54,6 +54,41 @@
       </v-dialog>
    </v-row>
 
+   <v-row justify="center">
+      <v-dialog v-model="editDialog" persistent>
+         <v-card>
+               <v-card-title>
+                  <span class="text-h5">Modifier l'article "{{ editArticle.name }}"</span>
+               </v-card-title>
+               <v-card-text>
+                  <v-container>
+                     <v-form @submit.prevent="updateArticle()">
+                           <v-text-field label="Titre" v-model="editArticle.name" :value="editArticle.name" required></v-text-field>
+                           <v-row>
+                              <v-col cols="12" md="6">
+                                 <v-autocomplete v-model="editArticle.id_sub_category" :items="subCategories" label="Sous categorie" item-text="name" item-value="slug"></v-autocomplete>
+                              </v-col>
+                              <v-col cols="12" md="6">
+                                 <v-file-input @change="updloadFile" accept="image/*" label="Image de couverture"></v-file-input>
+                              </v-col>
+                           </v-row>
+                           <v-text-field label="Resumé" counter="150" required></v-text-field>
+                           <quill-editor ref="myTextEditor" v-model="editArticle.description" label="Description" :config="editorOption">
+                           </quill-editor>
+
+                           <div style="text-align: center" class="my-4">
+                              <v-btn rounded dark color="primary" class="mb-5" type="submit" :loading="isLoading">
+                                 <v-icon>mdi-circle-edit-outline</v-icon>
+                                 Modifier
+                              </v-btn>
+                           </div>
+                     </v-form>
+                  </v-container>
+               </v-card-text>
+         </v-card>
+      </v-dialog>
+   </v-row>
+
    <v-snackbar v-model="snackbar" right top color="success">
       {{ message }}
       <template v-slot:action="{ attrs }">
@@ -66,22 +101,41 @@
 </template>
 
 <script>
+import UpdateArticle from '../article/UpdateArticle.vue';
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
+import {
+   quillEditor
+} from "vue-quill-editor";
 export default {
+   components: {
+      UpdateArticle,
+      quillEditor
+   },
    props: ["articles"],
 
    data() {
       return {
          dialog: false,
          singleArticle: {},
+         editArticle: {},
          message: "",
          name: "",
          isLoading: false,
          snackbar: false,
+         subCategories: [],
+         editorOption: {},
       };
    },
    methods: {
       updateArticle(article) {
-         return this.$router.push("/admin/articles/update/" + article.slug);
+         this.editArticle = article;
+         return this.$store.commit('setEditDialog', true);
+      },
+
+      updloadFile(e) {
+         this.editArticle.image = e;
       },
 
       editCategory: async function () {
@@ -126,6 +180,46 @@ export default {
          }
       },
 
+      updateArticle: async function () {
+         try {
+               this.editArticle._token = this.token;
+               this.editArticle.author = this.user.id;
+
+               console.log(this.editArticle);
+
+               let formData = new FormData();
+               formData.append("image", this.editArticle.image);
+               formData.append("name", this.editArticle.name);
+               formData.append("description", this.editArticle.description);
+               formData.append("author", this.editArticle.author);
+               formData.append("id_sub_category", this.editArticle.id_sub_category);
+               formData.append("_token", this.editArticle._token);
+
+               let response = await axios.post("/request/article/" + editArticle.slug + "/update", formData, {
+                  Headers: {
+                     "Content-type": "multipart/form-data",
+                  },
+               });
+               if (response.status == 200) {
+                  this.$router.push('/admin/articles/list')
+               }
+         } catch (error) {
+               console.log(error);
+         }
+      },
+
+      getSubCategories: async function () {
+         try {
+               let response = await axios.get("/request/sub-category");
+               if (response.status == 200) {
+                  this.subCategories = response.data;
+               }
+         } catch (error) {
+               console.log(error);
+               this.errors = error.response.errors;
+         }
+      },
+
       openDialog(category) {
          this.dialog = true;
          this.name = category.name;
@@ -137,5 +231,22 @@ export default {
          this.singleEditCategory = category;
       },
    },
+
+   mounted() {
+      this.getSubCategories();
+      this.$store.dispatch("actifUser");
+   },
+
+   computed: {
+      editDialog() {
+         return this.$store.state.editDialog;
+      },
+      user() {
+         return this.$store.state.user;
+      },
+      token() {
+         return this.$store.state._token;
+      }
+   }
 };
 </script>

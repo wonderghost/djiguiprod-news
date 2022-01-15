@@ -1,6 +1,7 @@
 <template>
 <v-app>
-   <h1 class="text-center my-4">Ajouter un article</h1>
+   <v-container>
+      <h1 class="text-center my-4">Ajouter un article</h1>
    <v-form>
       <v-text-field v-model="form.name" label="Titre" required></v-text-field>
       <v-row>
@@ -16,6 +17,9 @@
       </quill-editor>
 
       <div style="text-align: center" class="my-4">
+         <v-btn rounded dark color="error" outlined class="mb-5 mr-2" @click="closeDialog()">
+               Fermer
+         </v-btn>
          <v-btn rounded dark color="primary" class="mb-5" @click="saveArticle()" :loading="isLoading">
                <v-icon>mdi-plus</v-icon>
                Ajouter
@@ -39,6 +43,7 @@
          </v-card-actions>
       </v-card>
    </v-dialog>
+   </v-container>
 </v-app>
 </template>
 
@@ -105,7 +110,7 @@ export default {
                if (response.status == 200) {
                   this.isLoading = false
                   this.sendMail();
-                  this.$router.push('/admin/articles/list')
+                  this.$store.commit('setDialog', false);
                }
          } catch (error) {
                console.log(error);
@@ -123,6 +128,10 @@ export default {
                this.errors = theErrors;
                this.error = true;
          }
+      },
+
+      closeDialog() {
+         this.$store.commit('setDialog', false);
       },
 
       sendMail: async function() {
@@ -161,6 +170,9 @@ export default {
       token() {
          return this.$store.state._token;
       },
+      dialog() {
+         return this.$store.state.dialog;
+      }
    },
 };
 </script>

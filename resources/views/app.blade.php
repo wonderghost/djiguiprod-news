@@ -9,15 +9,15 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <meta property="og:url" content="https://news.djiguiprod.com/" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="L’article de l’ONG internationale est formel : « des joueuses de l’équipe nationale féminine de basketball des"/>
-    <meta property="og:description" content="L’article de l’ONG internationale est formel : « des joueuses de l’équipe nationale féminine de basketball des" />
-    <meta property="og:image" content="https://news.djiguiprod.com/uploads/0RDHnPscHo1627901040.jpg" />
-    {{-- <title>{{ config('app.name') }}</title> --}}
+    <meta property="og:title" content="Djiguiprod News. Site d'information culturel"/>
+    <meta property="og:description" content="Depuis Mars 2018, Djigui Production accompagne des acteurs culturels dans les domaines Culturel, Artistique et l'événementiel. Si votre objectif est de vous produire sur scène ou d’organiser des événements, sachez que nous apportons des solutions pour développer votre modèle économique, votre talent artistique et rendre efficient votre personne afin de vous réaliser pleinement." />
+    <meta property="og:image" content="/images/logo-djigui.png"/>
+    <title>{{ config('app.name') }}</title>
 </head>
 <body>
 
     <div id="app">
-        <app></app>
+        <dashboard></dashboard>
     </div>
     
     <script src="{{mix('js/app.js')}}"></script>

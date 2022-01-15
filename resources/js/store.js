@@ -12,12 +12,22 @@ const store = new Vuex.Store({
         categories: [],
         clients: [],
         banners: [],
-        articles: []
+        articles: [],
+        dialog: false,
+        editDialog: false,
     },
     mutations : {
         loading(state,value)
         {
             state.loader = value
+        },
+        setDialog(state, value)
+        {
+            state.dialog = value
+        },
+        setEditDialog(state, value)
+        {
+            state.editDialog = value
         },
         setDrawer(state, value) {
             state.drawer = value

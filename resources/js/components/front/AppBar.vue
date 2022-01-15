@@ -104,9 +104,9 @@
         </v-layout>
     </v-container>
 
-    <v-btn v-if="user" style="position: fixed; right: 1%; bottom: 1%; z-index: 1" fab dark small color="primary" class="d-none d-lg-block" @click.stop="drawer = !drawer">
+    <!-- <v-btn v-if="user" style="position: fixed; right: 1%; bottom: 1%; z-index: 1" fab dark small color="primary" class="d-none d-lg-block" @click.stop="drawer = !drawer">
         <v-icon dark> {{ menuIcon }} </v-icon>
-    </v-btn>
+    </v-btn> -->
 
 </div>
 </template>
